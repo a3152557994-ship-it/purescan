@@ -285,10 +285,16 @@ def sync_core_metadata(app_id: str, meta: dict[str, Any], territories: list[str]
         }
         if loc in vmap:
             vloc_id = vmap[loc]
-            asc("PATCH", f"/v1/appStoreVersionLocalizations/{vloc_id}", {"data": {"type": "appStoreVersionLocalizations", "id": vloc_id, "attributes": vattrs}})
+            st_vl, res_vl = asc("PATCH", f"/v1/appStoreVersionLocalizations/{vloc_id}", {"data": {"type": "appStoreVersionLocalizations", "id": vloc_id, "attributes": vattrs}})
+            if st_vl not in (200, 204):
+                print(f"  ! PATCH vloc {loc} failed ({st_vl}): {res_vl}")
         else:
-            _, c = asc("POST", "/v1/appStoreVersionLocalizations", {"data": {"type": "appStoreVersionLocalizations", "attributes": {"locale": loc, **vattrs}, "relationships": {"appStoreVersion": {"data": {"type": "appStoreVersions", "id": ver_id}}}}})
-            vloc_id = c["data"]["id"]
+            st_vl, c = asc("POST", "/v1/appStoreVersionLocalizations", {"data": {"type": "appStoreVersionLocalizations", "attributes": {"locale": loc, **vattrs}, "relationships": {"appStoreVersion": {"data": {"type": "appStoreVersions", "id": ver_id}}}}})
+            if st_vl not in (200, 201) or not isinstance(c, dict) or "data" not in c:
+                print(f"  ! POST vloc {loc} failed ({st_vl}): {c}")
+                vloc_id = None
+            else:
+                vloc_id = c["data"]["id"]
         print(f"  ✓ Localization {loc} synced")
         if do_shots and vloc_id:
             sync_shots(vloc_id, "APP_IPHONE_65", SHOT_ROOT / loc / "iphone65")
