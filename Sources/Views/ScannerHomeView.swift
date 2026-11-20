@@ -23,7 +23,8 @@ struct ScannerHomeView: View {
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
-                VStack(spacing: 16) {
+                VStack(spacing: 15) {
+                    brandTopBar
                     headerStrip
                     activeRadarStrip
                     viewfinderCard
@@ -32,41 +33,11 @@ struct ScannerHomeView: View {
                     trustFooterBanner
                 }
                 .padding(.horizontal, 16)
-                .padding(.top, 8)
-                .padding(.bottom, 28)
+                .padding(.top, 10)
+                .padding(.bottom, 40)
             }
             .background(LabTheme.paper.ignoresSafeArea())
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    HStack(spacing: 6) {
-                        Image(systemName: "viewfinder.circle.fill")
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundStyle(LabTheme.danger)
-                        Text(L10n.t("配料照妖镜", "PureScan"))
-                            .font(.system(size: 18, weight: .black))
-                            .foregroundStyle(LabTheme.ink)
-                    }
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        paywallRecordPreview = history.records.first
-                        showPaywall = true
-                    } label: {
-                        HStack(spacing: 4) {
-                            Image(systemName: store.isPro ? "checkmark.seal.fill" : "crown.fill")
-                                .font(.system(size: 11, weight: .bold))
-                            Text(store.isPro ? "PRO" : L10n.t("解锁全雷达", "PRO"))
-                                .font(.system(size: 12, weight: .black))
-                        }
-                        .foregroundStyle(store.isPro ? LabTheme.clean : .white)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 5)
-                        .background(store.isPro ? LabTheme.cleanSoft : LabTheme.ink)
-                        .clipShape(Capsule())
-                    }
-                }
-            }
+            .toolbar(.hidden, for: .navigationBar)
             .onAppear { camera.startIfPossible() }
             .onDisappear { camera.stop() }
             .onChange(of: selectedPhotoItem) { _, newItem in
@@ -83,6 +54,35 @@ struct ScannerHomeView: View {
                 Button(L10n.t("好的", "OK"), role: .cancel) {}
             } message: {
                 Text(errorMessage ?? "")
+            }
+        }
+    }
+
+    private var brandTopBar: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "viewfinder.circle.fill")
+                .font(.system(size: 24, weight: .bold))
+                .foregroundStyle(LabTheme.danger)
+            Text(L10n.t("配料照妖镜", "PureScan"))
+                .font(.system(size: 22, weight: .black))
+                .foregroundStyle(LabTheme.ink)
+                .fixedSize(horizontal: true, vertical: false)
+            Spacer()
+            Button {
+                paywallRecordPreview = history.records.first
+                showPaywall = true
+            } label: {
+                HStack(spacing: 4) {
+                    Image(systemName: store.isPro ? "checkmark.seal.fill" : "crown.fill")
+                        .font(.system(size: 11, weight: .bold))
+                    Text(store.isPro ? "PRO" : L10n.t("解锁全雷达", "PRO"))
+                        .font(.system(size: 12, weight: .black))
+                }
+                .foregroundStyle(store.isPro ? LabTheme.clean : .white)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 7)
+                .background(store.isPro ? LabTheme.cleanSoft : LabTheme.ink)
+                .clipShape(Capsule())
             }
         }
     }

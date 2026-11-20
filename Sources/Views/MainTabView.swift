@@ -95,37 +95,31 @@ struct MainTabView: View {
         didApplyLaunchDemo = true
 
         let args = ProcessInfo.processInfo.arguments
-        if let langIdx = args.firstIndex(of: "-ui_lang"), langIdx + 1 < args.count {
-            let code = args[langIdx + 1].lowercased()
-            history.setLanguage(code.hasPrefix("en") ? .en : .zhHans)
-        }
-
         guard let screenIdx = args.firstIndex(of: "-ui_demo_screen"), screenIdx + 1 < args.count else {
             return
         }
         let target = args[screenIdx + 1].lowercased()
 
-        // Seed rich realistic cabinet records for demo screenshots
-        if history.records.isEmpty {
-            let demoSpecs: [(String, Set<RadarType>, CabinetBucket)] = [
-                ("toast_bread", [.cleanFood, .sugarDiet, .momBaby], .redList),
-                ("clean_yogurt", [.cleanFood, .sugarDiet, .momBaby], .greenList),
-                ("instant_noodle_soup", [.cleanFood, .goutPurine], .redList),
-                ("clean_cat_food", [.petSafety], .greenList),
-                ("trap_cat_food", [.petSafety], .redList),
-                ("gentle_lotion", [.acneSkincare], .greenList)
-            ]
-            for (sid, radars, bucket) in demoSpecs.reversed() {
-                if let sample = SampleCatalog.all.first(where: { $0.id == sid }) {
-                    var rec = IngredientAnalyzer.analyze(
-                        rawText: sample.rawText,
-                        productName: sample.displayName,
-                        preferredDomain: sample.domain,
-                        activeRadars: radars
-                    )
-                    rec.cabinet = bucket
-                    history.saveRecord(rec)
-                }
+        // Seed rich realistic cabinet records in the active language for demo screenshots
+        history.records.removeAll()
+        let demoSpecs: [(String, Set<RadarType>, CabinetBucket)] = [
+            ("toast_bread", [.cleanFood, .sugarDiet, .momBaby], .redList),
+            ("clean_yogurt", [.cleanFood, .sugarDiet, .momBaby], .greenList),
+            ("instant_noodle_soup", [.cleanFood, .goutPurine], .redList),
+            ("clean_cat_food", [.petSafety], .greenList),
+            ("trap_cat_food", [.petSafety], .redList),
+            ("gentle_lotion", [.acneSkincare], .greenList)
+        ]
+        for (sid, radars, bucket) in demoSpecs.reversed() {
+            if let sample = SampleCatalog.all.first(where: { $0.id == sid }) {
+                var rec = IngredientAnalyzer.analyze(
+                    rawText: sample.rawText,
+                    productName: sample.displayName,
+                    preferredDomain: sample.domain,
+                    activeRadars: radars
+                )
+                rec.cabinet = bucket
+                history.saveRecord(rec)
             }
         }
 
@@ -146,7 +140,7 @@ struct MainTabView: View {
                     preferredDomain: .food,
                     activeRadars: [.cleanFood, .sugarDiet, .momBaby]
                 )
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     activeResult = rec
                 }
             }
@@ -159,15 +153,14 @@ struct MainTabView: View {
         case "paywall":
             selectedTab = 0
             if let toast = SampleCatalog.all.first(where: { $0.id == "toast_bread" }) {
-                let rec = IngredientAnalyzer.analyze(
+                paywallPreview = IngredientAnalyzer.analyze(
                     rawText: toast.rawText,
                     productName: toast.displayName,
                     preferredDomain: .food,
                     activeRadars: [.cleanFood, .sugarDiet, .momBaby]
                 )
-                paywallPreview = rec
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 showPaywall = true
             }
         default:

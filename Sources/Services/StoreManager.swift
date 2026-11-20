@@ -49,12 +49,15 @@ final class StoreManager: ObservableObject {
     }
 
     var remainingFreeScansToday: Int {
-        syncDailyQuotaIfNeeded()
-        return max(0, Self.freeDailyScanLimit - scansUsedToday)
+        max(0, Self.freeDailyScanLimit - scansUsedToday)
     }
 
     var canScanForFree: Bool {
         isPro || remainingFreeScansToday > 0
+    }
+
+    func refreshDailyQuotaOnActive() {
+        syncDailyQuotaIfNeeded()
     }
 
     func recordCompletedScan() {
@@ -71,9 +74,14 @@ final class StoreManager: ObservableObject {
         if savedDate != today {
             UserDefaults.standard.set(today, forKey: scansDateKey)
             UserDefaults.standard.set(0, forKey: scansCountKey)
-            scansUsedToday = 0
+            if scansUsedToday != 0 {
+                scansUsedToday = 0
+            }
         } else {
-            scansUsedToday = UserDefaults.standard.integer(forKey: scansCountKey)
+            let stored = UserDefaults.standard.integer(forKey: scansCountKey)
+            if scansUsedToday != stored {
+                scansUsedToday = stored
+            }
         }
     }
 

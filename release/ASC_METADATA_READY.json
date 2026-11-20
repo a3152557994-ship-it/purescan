@@ -1,0 +1,38 @@
+{
+  "bundleId": "com.yanghe.purescan",
+  "widgetBundleId": "com.yanghe.purescan.widgets",
+  "sku": "PURESCAN_IOS_20261120",
+  "version": "1.0.0",
+  "primaryLocale": "zh-Hans",
+  "primaryCategory": "FOOD_AND_DRINK",
+  "secondaryCategory": "HEALTH_AND_FITNESS",
+  "copyright": "2026 Yang He",
+  "supportEmail": "3152557994@qq.com",
+  "urls": {
+    "marketing": "https://a3152557994-ship-it.github.io/purescan/",
+    "support": "https://a3152557994-ship-it.github.io/purescan/support.html",
+    "privacy": "https://a3152557994-ship-it.github.io/purescan/privacy.html",
+    "terms": "https://a3152557994-ship-it.github.io/purescan/terms.html"
+  },
+  "pricing": {
+    "monthly": { "productId": "com.yanghe.purescan.pro.monthly", "cn": 6.0, "us": 1.99 },
+    "yearly": { "productId": "com.yanghe.purescan.pro.yearly", "cn": 18.0, "us": 9.99, "freeTrialDays": 3 },
+    "lifetime": { "productId": "com.yanghe.purescan.pro.lifetime", "cn": 28.0, "us": 14.99 }
+  },
+  "localizations": {
+    "zh-Hans": {
+      "name": "配料表扫描仪 - 配料照妖镜·添加剂避雷",
+      "subtitle": "0广告离线拍配料 · 控糖痛风宝妈宠粮红黑榜",
+      "keywords": "配料表查询,成分查查,剂查查,科技与狠活,零添加,控糖减肥,嘌呤高尿酸,护肤成分,美丽修行,猫粮狗粮,超市避雷,宝妈零食",
+      "promotionalText": "彻底告别摇一摇跳屏广告与条形码十样七样查不到！0.3秒本地离线拍配料表原文，控糖、痛风高尿酸、宝妈、敏肌护肤与猫狗粮一扫亮红灯。",
+      "description": "逛超市买面包、酸奶、零食、护肤品或猫狗粮，想扫一眼配料表避雷，结果同类软件不是满屏摇一摇乱跳广告、就是条形码十样七样查不到，甚至查两次就逼充 ¥198 会员？\n\n「配料照妖镜」就是为你做的 0 广告、免登录、100% 离线配料表扫描仪：\n\n【为什么大家换用配料照妖镜？】\n1. 不靠残缺条形码，直接 0.3 秒离线识读配料表原文\n基于 Apple 原生设备端 Vision 文字识别引擎，山姆、零食很忙、进口货、杂牌、烘焙短保、护肤品中英文 INCI、猫粮狗粮 100% 全扫得出！地下超市负二层没信号照样秒出结果，照片绝不上传云端。\n\n2. 永久 0 广告、0 开屏、0 摇一摇跳屏、无需注册登录\n打开直接对着配料表拍，也支持直接导入淘宝/拼多多/叮咚商品详情页截图一键扫雷。\n\n3. 6 大专属个人忌口雷达，按你的身体精准亮红灯\n- 科技与狠活雷达：紧盯新国标 GB 2760-2024 烘焙禁用脱氢乙酸钠、氢化植物油、亚硝酸钠、TBHQ、人工合成色素，同时绝不误杀维生素 C 等安全成分。\n- 控糖减脂雷达：揪出配料前三位加糖、果葡糖浆、麦芽糊精、植脂末与高倍人工代糖。\n- 痛风 / 高尿酸雷达：专门拦截零添加酱油与泡面里最阴险的“隐形高嘌呤炸弹”——酵母抽提物、呈味核苷酸二钠 (E635)、海鲜浓缩粉与高果糖。\n- 孕期与宝妈雷达：规避人工色素、防腐剂、咖啡因、酒精与孕慎护肤 A 醇。\n- 敏感肌 / 致痘护肤雷达：识读中英文 INCI，揪出 5 级致痘酯 IPM/IPP、MIT 强致敏防腐、甲醛释放体与高浓度酒精。\n- 猫狗粮避毒雷达：拦住木糖醇/洋葱/丙二醇/BHA/诱食剂，并自动识破不良商家“谷物分割法”陷阱！\n\n4. 超市「双品 VS 成分大决战」+ 我的红黑囤货柜\n纠结买哪包？左扫一包、右扫一包，1 秒同屏盖章谁更干净；支持把宝藏好物放进「安心回购」，把踩雷货「永久拉黑」，还能一键生成小红书/朋友圈高颜值质检避雷小票图！\n\n【透明良心权益】\n- 免费版每天可离线扫描 10 次，永久无广告、不强制登录。\n- Pro 会员提供月度（¥6/月）、年度（¥18/年，含 3 天免费试用且第 2 天主动推送到期提醒防意外扣费）、以及最受欢迎的一次买断终身版（¥28），随时可在系统订阅中取消。\n\n免责声明：本应用依据 GB 2760 / FDA / EFSA / INCI / AAFCO 公开标准做日常消费科普参考，不替代医生、营养师或兽医专业意见。\n隐私政策：https://a3152557994-ship-it.github.io/purescan/privacy.html\n使用条款：https://a3152557994-ship-it.github.io/purescan/terms.html"
+    },
+    "en-US": {
+      "name": "PureScan: Ingredient Scanner",
+      "subtitle": "Offline Food & Skincare Label",
+      "keywords": "yuka,additive,toxin,sugar,keto,gout,purine,acne,cosmetic,pet,cat food,clean eating,allergen,ocr",
+      "promotionalText": "No more 'barcode not found', forced logins, or pop-up ads! Scan ANY ingredient label 100% offline in 0.3s across Food, Skincare INCI, Gout/Purine & Pet Food.",
+      "description": "Tired of ingredient scanner apps that fail with 'Barcode Not Found' on local snacks, store brands, imported items, or pet food—or lock you out behind aggressive paywalls and logins?\n\nPureScan reads the actual ingredient label directly using 100% on-device Apple Vision OCR. Zero ads, zero accounts, zero cloud uploads—works instantaneously even in supermarket aisles with zero signal!\n\nKEY FEATURES\n• Instant Offline Label OCR (Not Limited by Barcodes): Scan food packages, Trader Joe's/Costco finds, skincare INCI bottles, cat/dog kibble, or online shopping screenshots in 0.3 seconds.\n• 6 Personalized Health & Safety Radars: Instead of flawed one-size-fits-all scores that penalize healthy cheese, tailor PureScan to YOU — Clean Additives, Low Sugar/Keto, Gout/High Purine (catches sneaky Yeast Extract & E635), Mom & Kids, Acne/Sensitive Skincare INCI, and Pet Food Safety (with automatic Grain-Splitting Trap detection!).\n• Custom Allergen Blacklist: Add your own red-flag triggers (Peanut, Gluten, Soy, Dairy) for instant red alerts.\n• Supermarket VS Showdown: Torn between two yogurts, breads, or cat foods? Compare them side-by-side to see the cleaner winner in 1 second.\n• Red & Green Cabinet + Shareable Inspection Receipts: Save Buy-Again favorites, blacklist junk forever, and export crisp lab-receipt cards.\n\nFAIR & TRANSPARENT PRO ACCESS\n• Free forever: 10 offline scans/day, zero ads, no login required.\n• PureScan Pro: Monthly ($1.99/mo), Annual ($9.99/yr with 3-day free trial + built-in Day-2 local reminder so you're never surprise-billed), or Lifetime Pay-Once ($14.99).\n\nEducational reference only based on public FDA/EFSA/GB 2760/INCI/AAFCO standards; not medical advice.\nPrivacy Policy: https://a3152557994-ship-it.github.io/purescan/privacy.html\nTerms of Use (EULA): https://a3152557994-ship-it.github.io/purescan/terms.html"
+    }
+  }
+}
