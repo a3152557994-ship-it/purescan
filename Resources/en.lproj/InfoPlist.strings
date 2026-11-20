@@ -1,0 +1,4 @@
+"CFBundleDisplayName" = "PureScan";
+"NSCameraUsageDescription" = "PureScan uses the camera to scan food, skincare, and pet food ingredient labels 100% offline on your device. Photos are never uploaded.";
+"NSPhotoLibraryUsageDescription" = "PureScan reads only the label photos or shopping screenshots you choose for 100% on-device ingredient analysis.";
+"NSPhotoLibraryAddUsageDescription" = "PureScan saves clean label receipt cards and VS comparison posters to your photo library only when you choose to export.";

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>配料照妖镜 PureScan — 0广告离线拍配料 · 食品/护肤/猫狗粮扫雷</title>
+  <meta name="description" content="0广告离线配料表扫描仪：不用条形码，0.3秒照出脱氢乙酸钠、反式脂肪、痛风隐形嘌呤、护肤致痘酯与猫粮谷物分割法。" />
+  <style>
+    :root {
+      --paper: #F7F5EF;
+      --card: #FFFFFF;
+      --ink: #151514;
+      --muted: #6B6961;
+      --red: #DA2525;
+      --red-soft: #FDECEC;
+      --amber: #D97706;
+      --amber-soft: #FEF3DD;
+      --green: #118A54;
+      --green-soft: #E6F8EE;
+      --line: rgba(21,21,20,0.09);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    .container { max-width: 980px; margin: 0 auto; padding: 20px 16px 64px; }
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0 22px; gap: 12px; flex-wrap: wrap;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 20px; }
+    .brand-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 4px var(--red-soft); }
+    .nav-actions { display: flex; gap: 8px; align-items: center; }
+    .pill-btn {
+      border: 1px solid var(--line); background: var(--card); color: var(--ink);
+      padding: 7px 14px; border-radius: 999px; font-weight: 700; font-size: 13px; cursor: pointer;
+      text-decoration: none;
+    }
+    .pill-btn.primary { background: var(--red); color: #fff; border-color: var(--red); }
+    .hero {
+      background: var(--ink); color: #fff; border-radius: 26px; padding: 34px 28px;
+      position: relative; overflow: hidden; margin-bottom: 20px;
+    }
+    .hero-tag {
+      display: inline-block; font-family: ui-monospace, monospace; font-size: 11px; font-weight: 800;
+      background: rgba(218,37,37,0.22); color: #FF7878; padding: 5px 11px; border-radius: 999px;
+      letter-spacing: 0.6px; margin-bottom: 14px;
+    }
+    .hero h1 { font-size: clamp(26px, 5vw, 42px); line-height: 1.15; margin: 0 0 12px; font-weight: 900; }
+    .hero p { margin: 0 0 20px; color: rgba(255,255,255,0.78); max-width: 680px; font-size: 15px; }
+    .hero-stats { display: flex; gap: 12px; flex-wrap: wrap; }
+    .stat-chip {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      padding: 8px 14px; border-radius: 12px; font-size: 13px; font-weight: 700;
+    }
+    .grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 18px; align-items: start; }
+    @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+    }
+    .sec-label {
+      font-family: ui-monospace, monospace; font-size: 11px; font-weight: 800; color: var(--muted);
+      letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .radar-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .radar-chip {
+      padding: 7px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper);
+      font-size: 12px; font-weight: 800; cursor: pointer; transition: 0.15s;
+    }
+    .radar-chip.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+    textarea {
+      width: 100%; min-height: 118px; border: 1.5px solid var(--line); border-radius: 14px;
+      padding: 12px; font-size: 14px; font-family: inherit; resize: vertical; background: #FDFCF9;
+    }
+    textarea:focus { outline: none; border-color: var(--red); }
+    .samples { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 12px 0 14px; }
+    .sample-btn {
+      text-align: left; background: var(--paper); border: 1px solid var(--line); border-radius: 12px;
+      padding: 10px 12px; cursor: pointer; transition: 0.15s;
+    }
+    .sample-btn:hover { border-color: var(--red); background: var(--red-soft); }
+    .sample-btn small { display: block; color: var(--red); font-weight: 800; font-size: 10px; }
+    .sample-btn strong { font-size: 13px; color: var(--ink); }
+    .scan-cta {
+      width: 100%; border: none; background: var(--red); color: #fff; font-weight: 900; font-size: 15px;
+      padding: 14px; border-radius: 14px; cursor: pointer;
+    }
+    .score-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .score-num { font-size: 52px; font-weight: 900; line-height: 1; }
+    .stamp {
+      display: inline-block; padding: 5px 12px; border-radius: 7px; font-weight: 900; font-size: 13px;
+      border: 2px solid currentColor; transform: rotate(-2deg); margin: 10px 0;
+    }
+    .hit-item {
+      border-radius: 14px; padding: 12px; margin-top: 10px; border: 1px solid var(--line);
+    }
+    .hit-item.danger { background: var(--red-soft); border-color: rgba(218,37,37,0.25); }
+    .hit-item.caution { background: var(--amber-soft); border-color: rgba(217,119,6,0.25); }
+    .hit-item.safe { background: var(--green-soft); border-color: rgba(17,138,84,0.25); }
+    .hit-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-weight: 800; font-size: 14px; }
+    .hit-reason { font-size: 12px; color: #333; margin-top: 4px; }
+    .tokens { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .tok { font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 7px; background: var(--paper); }
+    .tok.danger { background: var(--red); color: #fff; }
+    .tok.caution { background: var(--amber-soft); color: var(--amber); }
+    .tok.safe { background: var(--green-soft); color: var(--green); }
+    .pk-box { margin-top: 20px; }
+    .pk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pk-col { padding: 14px; border-radius: 16px; border: 2px solid var(--line); background: #fff; }
+    .pk-col.win { border-color: var(--green); background: #F5FCF8; }
+    footer { margin-top: 36px; text-align: center; font-size: 12px; color: var(--muted); }
+    footer a { color: var(--ink); font-weight: 700; margin: 0 8px; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <div class="brand"><span class="brand-dot"></span><span id="brandTitle">配料照妖镜 · PureScan</span></div>
+      <div class="nav-actions">
+        <button class="pill-btn" onclick="toggleLang()" id="langBtn">English</button>
+        <a class="pill-btn" href="./privacy.html">隐私政策</a>
+        <a class="pill-btn" href="./terms.html">使用条款</a>
+        <a class="pill-btn primary" href="./support.html">支持 / iOS</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-tag" id="heroTag">ZERO-AD OFFLINE LABEL OCR · 0广告离线秒扫</div>
+      <h1 id="heroH1">不用条形码，0.3 秒照穿包装背面的「科技与狠活」</h1>
+      <p id="heroP">专治同类软件满屏摇一摇广告、条形码十样七样查不到、查两次就逼充 ¥198 的恶习。基于 Apple Vision 100% 本地离线识字，按你的控糖、痛风高尿酸、孕妈、敏肌护肤、猫狗粮 5 大忌口雷达精准亮红灯。</p>
+      <div class="hero-stats">
+        <div class="stat-chip">📵 地下超市无网照扫</div>
+        <div class="stat-chip">🚫 永久 0 广告 / 0 摇一摇</div>
+        <div class="stat-chip">⚡ 食品 + 护肤 INCI + 猫狗粮全覆盖</div>
+        <div class="stat-chip">💎 免费日扫 10 次 · Pro 买断仅 ¥28</div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <div class="card">
+        <div class="sec-label" id="lblRadar">1. 点选你的专属忌口雷达（可多选叠加）</div>
+        <div class="radar-wrap" id="radarWrap"></div>
+
+        <div class="sec-label" id="lblInput">2. 点选热门实测样本，或直接粘贴任意配料表</div>
+        <div class="samples" id="sampleGrid"></div>
+        <textarea id="labelInput"></textarea>
+        <button class="scan-cta" onclick="runAnalyze()" id="scanBtn">🔍 立即开启照妖镜离线分析</button>
+      </div>
+
+      <div class="card" id="resultCard">
+        <div class="sec-label">3. 质检红黑报告（实时演算）</div>
+        <div class="score-head">
+          <div>
+            <div style="font-size:18px;font-weight:900" id="resTitle">—</div>
+            <div class="stamp" id="resStamp">—</div>
+          </div>
+          <div style="text-align:right">
+            <div class="score-num" id="resScore">—</div>
+            <div style="font-size:11px;font-family:monospace;color:var(--muted)">CLEAN / 100</div>
+          </div>
+        </div>
+        <div id="resHeadline" style="font-size:14px;font-weight:700;margin:6px 0 10px"></div>
+        <div id="resHits"></div>
+        <div class="sec-label" style="margin-top:16px">原文荧光标红对照</div>
+        <div class="tokens" id="resTokens"></div>
+      </div>
+    </div>
+
+    <div class="card pk-box">
+      <div class="sec-label">超市双品 VS 成分大决战（一眼比出哪包更干净）</div>
+      <div class="pk-grid" id="pkGrid"></div>
+    </div>
+
+    <footer>
+      <p>配料照妖镜 (PureScan) · 100% 本地离线运算 · 依据 GB 2760 / FDA / EFSA / INCI / AAFCO 公开标准科普解析，仅供参考不构成医疗建议。</p>
+      <p>
+        <a href="./privacy.html">隐私政策 Privacy</a> ·
+        <a href="./terms.html">使用条款 Terms (EULA)</a> ·
+        <a href="./support.html">技术支持 Support</a>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    let isEN = false;
+    const RADARS = [
+      { id: 'cleanFood', zh: '🛡️ 科技与狠活', en: '🛡️ Additives' },
+      { id: 'sugarDiet', zh: '🔥 控糖减脂', en: '🔥 Low Sugar' },
+      { id: 'goutPurine', zh: '💧 痛风高尿酸', en: '💧 Gout/Purine' },
+      { id: 'momBaby', zh: '🤰 孕期宝妈', en: '🤰 Mom & Kids' },
+      { id: 'acneSkincare', zh: '🧴 敏感致痘护肤', en: '🧴 Skincare INCI' },
+      { id: 'petSafety', zh: '🐱 猫狗粮避毒', en: '🐱 Pet Food' }
+    ];
+    let activeRadars = new Set(['cleanFood', 'sugarDiet', 'goutPurine', 'momBaby', 'acneSkincare', 'petSafety']);
+
+    const DB = [
+      { id:'sd', zh:'脱氢乙酸钠', en:'Sodium Dehydroacetate', al:['脱氢乙酸钠','sodium dehydroacetate','e265'], risk:'danger', p:24, r:['cleanFood','momBaby'], reasonZH:'新国标 GB 2760-2024 已禁用于面包糕点，存在肝肾代谢负担风险。', reasonEN:'Banned in bakery goods under GB 2760-2024.' },
+      { id:'ho', zh:'氢化植物油', en:'Hydrogenated Oil', al:['氢化植物油','hydrogenated vegetable oil','partially hydrogenated'], risk:'danger', p:26, r:['cleanFood','sugarDiet','momBaby'], reasonZH:'工业反式脂肪酸核心来源，增加心血管代谢负担。', reasonEN:'Primary source of industrial trans fats.' },
+      { id:'hfcs', zh:'果葡糖浆', en:'High Fructose Corn Syrup', al:['果葡糖浆','高果糖','high fructose corn syrup','hfcs'], risk:'danger', p:22, r:['cleanFood','sugarDiet','goutPurine','momBaby'], reasonZH:'控糖与痛风双重天敌，直接推高内脏脂肪与血清尿酸。', reasonEN:'Spikes visceral fat and serum uric acid.' },
+      { id:'marg', zh:'人造奶油/起酥油', en:'Margarine / Shortening', al:['人造奶油','起酥油','植脂末','代可可脂','margarine','shortening'], risk:'danger', p:18, r:['cleanFood','sugarDiet','momBaby'], reasonZH:'廉价工业替代油脂，远不如天然黄油/可可脂干净。', reasonEN:'Ultra-processed industrial fat substitute.' },
+      { id:'yeast', zh:'酵母抽提物', en:'Yeast Extract', al:['酵母抽提物','yeast extract'], risk:'danger', p:22, r:['goutPurine'], reasonZH:'痛风隐形高嘌呤炸弹！零添加酱油和泡面里最易踩雷。', reasonEN:'Ultra-concentrated purine bomb for gout sufferers.' },
+      { id:'ig', zh:'呈味核苷酸二钠 (E635)', en:'Disodium 5-Ribonucleotide', al:['呈味核苷酸二钠','肌苷酸二钠','鸟苷酸二钠','e635','ribonucleotide'], risk:'danger', p:24, r:['goutPurine','cleanFood'], reasonZH:'直接代谢为尿酸的嘌呤核苷酸增鲜剂，痛风红灯劝退。', reasonEN:'Purine nucleotides metabolized directly into uric acid.' },
+      { id:'sea', zh:'浓缩海鲜粉/虾粉', en:'Seafood / Shrimp Extract', al:['虾粉','海鲜粉','浓缩海鲜','seafood extract'], risk:'danger', p:20, r:['goutPurine'], reasonZH:'高嘌呤海产浓缩汤底，高尿酸期严格规避。', reasonEN:'Heavy purine load from concentrated shellfish.' },
+      { id:'tbhq', zh:'TBHQ 抗氧化剂', en:'TBHQ (E319)', al:['tbhq','叔丁基对苯二酚','e319'], risk:'danger', p:20, r:['cleanFood','momBaby'], reasonZH:'油炸泡面常见石油衍生合成抗氧化剂。', reasonEN:'Synthetic oil preservative in fried snacks.' },
+      { id:'asp', zh:'阿斯巴甜 / 苯甲酸钠', en:'Aspartame / Sodium Benzoate', al:['阿斯巴甜','苯甲酸钠','aspartame','sodium benzoate','e951','e211'], risk:'danger', p:18, r:['cleanFood','sugarDiet','momBaby'], reasonZH:'争议合成代糖/防腐剂，儿童与孕期建议避开。', reasonEN:'Controversial synthetic sweetener/preservative.' },
+      { id:'dye', zh:'人工合成色素', en:'Synthetic Food Dyes', al:['柠檬黄','诱惑红','日落黄','亮蓝','yellow 5','red 40','e102','e129'], risk:'danger', p:18, r:['cleanFood','momBaby'], reasonZH:'零营养价值染色剂，欧盟提示或影响儿童注意力。', reasonEN:'Zero-nutrition dye with EU hyperactivity warning.' },
+      { id:'suc', zh:'三氯蔗糖 / 安赛蜜', en:'Sucralose / Ace-K', al:['三氯蔗糖','安赛蜜','sucralose','acesulfame'], risk:'caution', p:10, r:['cleanFood','sugarDiet'], reasonZH:'高倍人工甜味剂，高频摄入或扰动肠道菌群。', reasonEN:'High-intensity synthetic sweetener.' },
+      { id:'malto', zh:'麦芽糊精 / 棕榈油', en:'Maltodextrin / Palm Oil', al:['麦芽糊精','棕榈油','maltodextrin','palm oil'], risk:'caution', p:10, r:['cleanFood','sugarDiet'], reasonZH:'高升糖廉价填料或高饱和精炼油，减脂期控量。', reasonEN:'High-GI filler or refined saturated oil.' },
+      { id:'ret', zh:'视黄醇 (A醇)', en:'Retinol', al:['视黄醇','a醇','retinol'], risk:'danger', p:24, r:['acneSkincare','momBaby'], reasonZH:'孕期红灯禁忌！敏感肌屏障脆弱期极易泛红爆皮。', reasonEN:'Avoid during pregnancy; irritates sensitive barriers.' },
+      { id:'mit', zh:'MIT 致敏防腐 / DMDM', en:'MIT / DMDM Hydantoin', al:['甲基异噻唑啉酮','dmdm','methylisothiazolinone','羟苯丙酯','propylparaben'], risk:'danger', p:24, r:['acneSkincare','momBaby'], reasonZH:'强接触性致敏防腐或甲醛释放体，敏肌见之即跑。', reasonEN:'High-allergen or formaldehyde-releasing preservative.' },
+      { id:'ipm', zh:'肉豆蔻酸异丙酯 (高致痘)', en:'Isopropyl Myristate (Comedogenic)', al:['肉豆蔻酸异丙酯','棕榈酸异丙酯','isopropyl myristate','isopropyl palmitate'], risk:'danger', p:20, r:['acneSkincare'], reasonZH:'致痘指数 5/5 的闷痘合成酯，油痘闭口肌天敌。', reasonEN:'5/5 pore-clogging emollient ester.' },
+      { id:'bha', zh:'BHA / BHT 合成防腐', en:'BHA / BHT', al:['bha','bht','丁基羟基'], risk:'danger', p:24, r:['petSafety','cleanFood'], reasonZH:'争议合成防腐剂，优质宠粮早已淘汰。', reasonEN:'Controversial synthetic preservative.' },
+      { id:'pet_att', zh:'宠物诱食剂 / 不明肉粉', en:'Flavor Enhancers / Meat By-Products', al:['宠物饲料复合调味料','诱食剂','肉粉','副产品','flavor enhancers','meat by-products','chicken meal'], risk:'danger', p:18, r:['petSafety'], reasonZH:'常见毒粮伪装术，掩盖劣质原料易致软便黑下巴。', reasonEN:'Masks low-grade rendering meal & causes picky eating.' },
+      { id:'milk', zh:'生牛乳 / 活性乳酸菌 / 鲜鸡肉 / 神经酰胺', en:'Raw Milk / Probiotics / Fresh Meat / Ceramide', al:['生牛乳','嗜热链球菌','保加利亚乳杆菌','鲜鸡肉','鲜鸭肉','三文鱼','牛磺酸','神经酰胺','角鲨烷','积雪草','raw milk','probiotics','fresh chicken','ceramide','squalane'], risk:'safe', p:0, r:['cleanFood','acneSkincare','petSafety'], reasonZH:'真材实料的干净优质基底成分！', reasonEN:'Clean, high-transparency base ingredient.' }
+    ];
+
+    const SAMPLES = [
+      { id:'toast', zh:'网红手撕吐司', en:'Store Milk Toast', badgeZH:'面包踩雷', badgeEN:'Bakery Trap', textZH:'配料：小麦粉、白砂糖、人造奶油、氢化植物油、果葡糖浆、脱氢乙酸钠、三氯蔗糖、柠檬黄、食用香精。', textEN:'Ingredients: Wheat Flour, Sugar, Margarine, Partially Hydrogenated Vegetable Oil, High Fructose Corn Syrup, Sodium Dehydroacetate, Sucralose, Yellow 5.' },
+      { id:'yogurt', zh:'极简原味低温酸奶', en:'Minimalist Greek Yogurt', badgeZH:'干净模范', badgeEN:'Clean 100', textZH:'配料：生牛乳（≥99%）、嗜热链球菌、保加利亚乳杆菌。', textEN:'Ingredients: Raw Milk (99%), Live Probiotics.' },
+      { id:'ramen', zh:'网红浓汤泡面', en:'Rich Broth Ramen', badgeZH:'痛风隐形雷', badgeEN:'Gout Bomb', textZH:'配料：小麦粉、棕榈油、麦芽糊精、酵母抽提物、呈味核苷酸二钠、虾粉、浓缩海鲜粉、TBHQ。', textEN:'Ingredients: Wheat Flour, Palm Oil, Maltodextrin, Yeast Extract, Disodium 5-Ribonucleotide (E635), Seafood Extract, TBHQ (E319).' },
+      { id:'cat', zh:'平价「无谷」猫粮', en:'Budget Cat Kibble', badgeZH:'谷物分割法', badgeEN:'Pet Trap', textZH:'原料组成：鸡肉粉、玉米、大米、小麦粉、豆粕、宠物饲料复合调味料、卡拉胶、BHA、BHT。', textEN:'Ingredients: Chicken Meal, Corn, Rice, Wheat Flour, Soy Meal, Flavor Enhancers, BHA, BHT.' },
+      { id:'skin', zh:'网红抗老面霜', en:'Viral Glow Cream', badgeZH:'致痘+孕慎', badgeEN:'Skin Alert', textZH:'成分：水、甘油、肉豆蔻酸异丙酯、视黄醇、香精、羟苯丙酯、甲基异噻唑啉酮、DMDM乙内酰脲。', textEN:'Ingredients: Aqua, Glycerin, Isopropyl Myristate, Retinol, Propylparaben, Methylisothiazolinone, DMDM Hydantoin.' },
+      { id:'cleancat', zh:'鲜肉烘焙猫粮', en:'Baked Fresh Cat Food', badgeZH:'干净宠粮', badgeEN:'Clean Pet', textZH:'原料组成：鲜鸡肉(52%)、鲜鸭肉(24%)、三文鱼(10%)、牛磺酸。', textEN:'Ingredients: Fresh Chicken (52%), Fresh Duck (24%), Salmon (10%), Taurine.' }
+    ];
+
+    let currentTitle = SAMPLES[0].zh;
+
+    function renderRadars() {
+      const wrap = document.getElementById('radarWrap');
+      wrap.innerHTML = RADARS.map(r => `
+        <button class="radar-chip ${activeRadars.has(r.id) ? 'active' : ''}" onclick="toggleRadar('${r.id}')">
+          ${isEN ? r.en : r.zh}
+        </button>
+      `).join('');
+    }
+    function toggleRadar(id) {
+      if (activeRadars.has(id) && activeRadars.size > 1) activeRadars.delete(id);
+      else activeRadars.add(id);
+      renderRadars();
+      runAnalyze();
+    }
+
+    function renderSamples() {
+      const grid = document.getElementById('sampleGrid');
+      grid.innerHTML = SAMPLES.map(s => `
+        <button class="sample-btn" onclick="pickSample('${s.id}')">
+          <small>${isEN ? s.badgeEN : s.badgeZH}</small>
+          <strong>${isEN ? s.en : s.zh}</strong>
+        </button>
+      `).join('');
+    }
+
+    function pickSample(id) {
+      const s = SAMPLES.find(x => x.id === id);
+      currentTitle = isEN ? s.en : s.zh;
+      document.getElementById('labelInput').value = isEN ? s.textEN : s.textZH;
+      runAnalyze();
+    }
+
+    function analyzeText(raw, name) {
+      const clean = raw.replace(/^(配料表?|原料组成|成分表?|ingredients)\s*[:：]/i, '');
+      const tokens = clean.replace(/[（）()；;。]/g, '、').split(/[、,，/]/).map(t => t.trim()).filter(Boolean);
+      const hits = [];
+      const seen = new Set();
+
+      tokens.forEach((tok, idx) => {
+        const low = tok.toLowerCase();
+        DB.forEach(entry => {
+          if (seen.has(entry.id)) return;
+          if (entry.al.some(a => low.includes(a))) {
+            seen.add(entry.id);
+            const radarOn = entry.r.some(r => activeRadars.has(r));
+            const risk = entry.risk === 'safe' ? 'safe' : (radarOn ? entry.risk : 'caution');
+            const penalty = entry.risk === 'safe' ? 0 : (radarOn ? entry.p : Math.max(4, Math.round(entry.p / 3)));
+            hits.push({ ...entry, tok, idx: idx + 1, effRisk: risk, effPen: penalty });
+          }
+        });
+      });
+
+      // Grain splitting detector
+      const grains = ['玉米','大米','小麦','豆粕','corn','rice','wheat','soy'];
+      const gCount = tokens.slice(0, 6).filter(t => grains.some(g => t.toLowerCase().includes(g))).length;
+      if (gCount >= 2 && activeRadars.has('petSafety')) {
+        hits.unshift({ id:'grain', zh:'识破「谷物分割法」陷阱', en:'Grain-Splitting Trap Detected', tok:'前6位多谷物', idx:1, effRisk:'danger', effPen:18, reasonZH:`前 6 位塞了 ${gCount} 种廉价谷物/豆粕，故意把肉排第一位！`, reasonEN:`${gCount} grain fillers split in top 6 spots to fake meat-first label!` });
+      }
+
+      const pen = hits.reduce((a, b) => a + b.effPen, 0);
+      const score = Math.max(8, Math.min(100, 100 - pen));
+      const dangers = hits.filter(h => h.effRisk === 'danger').length;
+      const grade = score >= 85 ? 'clean' : (score >= 65 ? 'mild' : 'danger');
+      return { name, tokens, hits, score, dangers, grade };
+    }
+
+    function runAnalyze() {
+      const txt = document.getElementById('labelInput').value.trim();
+      if (!txt) return;
+      const res = analyzeText(txt, currentTitle);
+      const color = res.grade === 'clean' ? 'var(--green)' : (res.grade === 'mild' ? 'var(--amber)' : 'var(--red)');
+      document.getElementById('resTitle').textContent = res.name;
+      const scoreEl = document.getElementById('resScore');
+      scoreEl.textContent = res.score;
+      scoreEl.style.color = color;
+      const stampEl = document.getElementById('resStamp');
+      stampEl.style.color = color;
+      stampEl.textContent = res.grade === 'clean'
+        ? (isEN ? 'CLEAN · BUY WITH CONFIDENCE' : '✅ 干净配料 · 闭眼入')
+        : (res.grade === 'mild' ? (isEN ? 'MILD · OCCASIONAL TREAT' : '🟡 轻度科技 · 偶尔解馋') : (isEN ? 'RED ALERT · PUT IT BACK' : '⚠️ 科技与狠活 · 建议劝退'));
+      document.getElementById('resHeadline').textContent = res.dangers > 0
+        ? (isEN ? `Caught ${res.dangers} red-flag hazards on your active radars.` : `按你的忌口雷达揪出 ${res.dangers} 处红灯雷区！`)
+        : (isEN ? 'Zero red-flag additives detected. Clean choice!' : '未检出高危添加剂与忌口雷区，放心塞进购物车！');
+
+      const sorted = [...res.hits].sort((a, b) => (a.effRisk === 'danger' ? -1 : 1));
+      document.getElementById('resHits').innerHTML = sorted.map(h => `
+        <div class="hit-item ${h.effRisk}">
+          <div class="hit-top">
+            <span>${h.effRisk === 'danger' ? '🔴' : (h.effRisk === 'caution' ? '🟡' : '🟢')} ${isEN ? h.en : h.zh}</span>
+            <span style="font-size:11px;font-family:monospace">#${h.idx}</span>
+          </div>
+          <div class="hit-reason">${isEN ? h.reasonEN : h.reasonZH}</div>
+        </div>
+      `).join('') || `<div class="hit-item safe"><strong>🟢 ${isEN ? 'All Clear!' : '配料干净清爽！'}</strong></div>`;
+
+      document.getElementById('resTokens').innerHTML = res.tokens.map(t => {
+        const hit = res.hits.find(h => h.tok === t);
+        return `<span class="tok ${hit ? hit.effRisk : ''}">${t}</span>`;
+      }).join('');
+    }
+
+    function renderPK() {
+      const l = analyzeText(isEN ? SAMPLES[0].textEN : SAMPLES[0].textZH, isEN ? SAMPLES[0].en : SAMPLES[0].zh);
+      const r = analyzeText(isEN ? SAMPLES[1].textEN : SAMPLES[1].textZH, isEN ? SAMPLES[1].en : SAMPLES[1].zh);
+      const grid = document.getElementById('pkGrid');
+      [l, r].forEach((item, i) => {
+        const win = (i === 0 ? l.score > r.score : r.score >= l.score);
+        grid.innerHTML += `
+          <div class="pk-col ${win ? 'win' : ''}">
+            <div style="font-size:11px;font-weight:900;color:${win ? 'var(--green)' : 'var(--red)'}">
+              ${win ? (isEN ? '🏆 CLEANER WINNER' : '🏆 更干净胜出') : (isEN ? '⚠️ MORE ADDITIVES' : '⚠️ 科技狠活落败')}
+            </div>
+            <div style="font-size:16px;font-weight:900;margin:6px 0">${item.name}</div>
+            <div style="font-size:38px;font-weight:900;color:${win ? 'var(--green)' : 'var(--red)'}">${item.score}<span style="font-size:13px;color:var(--muted)">/100</span></div>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px">${isEN ? `Red Flags: ${item.dangers} · Items: ${item.tokens.length}` : `红灯 ${item.dangers} 项 · 配料 ${item.tokens.length} 项`}</div>
+          </div>
+        `;
+      });
+    }
+
+    function toggleLang() {
+      isEN = !isEN;
+      document.getElementById('langBtn').textContent = isEN ? '中文' : 'English';
+      document.getElementById('heroH1').textContent = isEN ? 'Skip Broken Barcodes. Scan Any Ingredient Label Offline in 0.3s.' : '不用条形码，0.3 秒照穿包装背面的「科技与狠活」';
+      document.getElementById('heroP').textContent = isEN
+        ? 'Zero ads, zero forced logins, 100% on-device Apple Vision OCR. Personalized radars for Low Sugar, Gout/Purine, Pregnancy, Acne Skincare INCI, and Pet Food.'
+        : '专治同类软件满屏摇一摇广告、条形码十样七样查不到、查两次就逼充 ¥198 的恶习。基于 Apple Vision 100% 本地离线识字，按你的控糖、痛风高尿酸、孕妈、敏肌护肤、猫狗粮 5 大忌口雷达精准亮红灯。';
+      document.getElementById('scanBtn').textContent = isEN ? '🔍 Analyze Label Offline' : '🔍 立即开启照妖镜离线分析';
+      document.getElementById('pkGrid').innerHTML = '';
+      renderRadars();
+      renderSamples();
+      pickSample('toast');
+      renderPK();
+    }
+
+    renderRadars();
+    renderSamples();
+    pickSample('toast');
+    renderPK();
+  </script>
+</body>
+</html>

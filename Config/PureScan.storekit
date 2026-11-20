@@ -1,0 +1,99 @@
+{
+  "identifier" : "A1B2C3D4-E5F6-47A8-9B0C-1234567890AB",
+  "nonRenewingSubscriptions" : [],
+  "products" : [
+    {
+      "displayPrice" : "14.99",
+      "familyShareable" : true,
+      "internalID" : "PS_LIFETIME_01",
+      "localizations" : [
+        {
+          "description" : "Pay once, own PureScan Pro forever: all 6 radars, VS PK showdown, unlimited offline scans & HD export.",
+          "displayName" : "PureScan Pro Lifetime",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "一次买断永久解锁全 6 大忌口雷达、超市双品 PK 对比、无限离线扫描与高清避雷小票导出。",
+          "displayName" : "配料照妖镜永久买断 Pro",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "com.yanghe.purescan.pro.lifetime",
+      "referenceName" : "PureScan Pro Lifetime",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_storeKitErrors" : []
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "PS_PRO_GROUP",
+      "localizations" : [],
+      "name" : "PureScan Pro",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "1.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "PS_MONTHLY_01",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Flexible monthly PureScan Pro access to all 6 radars and VS comparisons.",
+              "displayName" : "PureScan Pro Monthly",
+              "locale" : "en_US"
+            },
+            {
+              "description" : "按月解锁全 6 大忌口雷达、双品 PK 与无限离线扫描，随时可取消。",
+              "displayName" : "配料照妖镜月度会员",
+              "locale" : "zh_CN"
+            }
+          ],
+          "productID" : "com.yanghe.purescan.pro.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "PureScan Pro Monthly",
+          "subscriptionGroupID" : "PS_PRO_GROUP",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "9.99",
+          "familyShareable" : true,
+          "groupNumber" : 1,
+          "internalID" : "PS_YEARLY_01",
+          "introductoryOffer" : {
+            "internalID" : "PS_YEARLY_TRIAL_3D",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
+          "localizations" : [
+            {
+              "description" : "Annual PureScan Pro with 3-day free trial and built-in Day-2 renewal reminder.",
+              "displayName" : "PureScan Pro Annual",
+              "locale" : "en_US"
+            },
+            {
+              "description" : "年度会员含 3 天免费试用与第 2 天到期提醒，解锁全 6 大忌口雷达与双品 PK。",
+              "displayName" : "配料照妖镜年度会员",
+              "locale" : "zh_CN"
+            }
+          ],
+          "productID" : "com.yanghe.purescan.pro.yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "PureScan Pro Annual",
+          "subscriptionGroupID" : "PS_PRO_GROUP",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

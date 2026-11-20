@@ -1,0 +1,572 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E2A9059073A546B964DABE2B /* app_res::Assets.xcassets */ = {isa = PBXBuildFile; fileRef = 8BC07BEFCC123BD7ABE4873E; };
+		4E0D6DDF2E86A70C855DCC89 /* app_res::InfoPlist.strings */ = {isa = PBXBuildFile; fileRef = 0ACFB02F4CDEF867B65442B1; };
+		026604F5354FB4507AAA9862 /* app_res::PrivacyInfo.xcprivacy */ = {isa = PBXBuildFile; fileRef = D080F2EC532FF5286209329D; };
+		9A63E91B698A0D0884026F36 /* app_src::Sources/PureScanApp.swift */ = {isa = PBXBuildFile; fileRef = 502921C3D5E584D8099FEE8A; };
+		75AE8E5A950906723EA4A680 /* app_src::Sources/Services/HistoryStore.swift */ = {isa = PBXBuildFile; fileRef = A445F094BBBF629F5AF7D2D9; };
+		A6B28214A3FACB2B63D42C83 /* app_src::Sources/Services/ReceiptCardRenderer.swift */ = {isa = PBXBuildFile; fileRef = 8650925723BC41B861AE93C7; };
+		439A2AA3B5D6E35623DBC696 /* app_src::Sources/Services/StoreManager.swift */ = {isa = PBXBuildFile; fileRef = BEF6729E7F36AC5EDD4312EC; };
+		B8E2A0B100D48A89791B9118 /* app_src::Sources/Services/VisionOCRService.swift */ = {isa = PBXBuildFile; fileRef = 3921C6DB428CC8A7AE92DBB6; };
+		DC02249A7D4AEAEBD3A8B456 /* app_src::Sources/Shared/IngredientAnalyzer.swift */ = {isa = PBXBuildFile; fileRef = F910D69032EF26F9F43A33F4; };
+		BA31E264795E5889D8C83AB4 /* app_src::Sources/Shared/IngredientDatabase.swift */ = {isa = PBXBuildFile; fileRef = 4D3BD41F7E0C8153C49325EF; };
+		AF6DC6AF6A4B0D976A4DBD2F /* app_src::Sources/Shared/L10n.swift */ = {isa = PBXBuildFile; fileRef = 4B8CE034CA45F86EC91DF336; };
+		C734926467DE38D417575747 /* app_src::Sources/Shared/Models.swift */ = {isa = PBXBuildFile; fileRef = 027D6C57B4D37BF92871E961; };
+		461B0807695B45FF66AB2451 /* app_src::Sources/Views/CabinetHistoryView.swift */ = {isa = PBXBuildFile; fileRef = 228EB5B49196FCDD13DAB6F1; };
+		84AC08805DD69EB18927F768 /* app_src::Sources/Views/CameraPreviewView.swift */ = {isa = PBXBuildFile; fileRef = C25DB348E85689D41289CBC1; };
+		A171416EC67C14DCA88D9A2B /* app_src::Sources/Views/ComparePKView.swift */ = {isa = PBXBuildFile; fileRef = 1EB9144BEB19A3EEF40783AF; };
+		22227EDB1643C842E7C306F4 /* app_src::Sources/Views/MainTabView.swift */ = {isa = PBXBuildFile; fileRef = 8747B9C263E3E82F8B0F3724; };
+		348072CEC3C285E301865D77 /* app_src::Sources/Views/PaywallView.swift */ = {isa = PBXBuildFile; fileRef = 3B7DCCB6580BA34F282583E9; };
+		2D0B7D9EB888F57B85A59775 /* app_src::Sources/Views/RadarProfileView.swift */ = {isa = PBXBuildFile; fileRef = 76283E4A2ED541EC756D909D; };
+		D31618BFC512520D7B865E0C /* app_src::Sources/Views/ScanResultSheet.swift */ = {isa = PBXBuildFile; fileRef = AAF31F512A48552CE782C838; };
+		A613C1CAF93DC91EF5504E5B /* app_src::Sources/Views/ScannerHomeView.swift */ = {isa = PBXBuildFile; fileRef = 1A210F1E7DDDC2906CA78E22; };
+		924291BEF7CBCF297B5C3122 /* app_src::Sources/Views/Theme.swift */ = {isa = PBXBuildFile; fileRef = 2B4D296DEA9ECD76D0D06882; };
+		6DFC4F1427869EA35533C15D /* test_res::PureScan.storekit */ = {isa = PBXBuildFile; fileRef = 9397D6059735B07D31F8BA8B; };
+		847B90ACE6FAF1A8959DCBCD /* test_src::Tests/PureScanTests.swift */ = {isa = PBXBuildFile; fileRef = 1BE0A17B7D0457BDEF7E3A37; };
+		7E2F211730D53142DFF9665D /* widget_res::PrivacyInfo.xcprivacy */ = {isa = PBXBuildFile; fileRef = D080F2EC532FF5286209329D; };
+		24F736948E737EC6038A19B8 /* widget_src::Widgets/PureScanWidget.swift */ = {isa = PBXBuildFile; fileRef = 1A912CDD304F7A60BB6801F3; };
+		93A864F5E22F5F63179A94C3 /* PureScanWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8E693243FD5416B5E6A74E0F; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6072AEE047A0A9D7EECF7492 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFFEF21EC6F830D2FCBDB38F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B901CE3AD4D22A01F9C17A81;
+			remoteInfo = PureScanWidgets;
+		};
+		FA6094939BBC793624E76B79 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFFEF21EC6F830D2FCBDB38F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6984916EBE133C2DAD3C5C88;
+			remoteInfo = PureScan;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		879479A4AF0B189BC6CB82AD /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				93A864F5E22F5F63179A94C3 /* PureScanWidgets.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1E41F2B7BF4830D7C3EF62EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info.plist"; path = "Config/Info.plist"; sourceTree = "<group>"; };
+		6AD3A4FF10F9D5D9C4588CC6 /* PureScan.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "PureScan.entitlements"; path = "Config/PureScan.entitlements"; sourceTree = "<group>"; };
+		9397D6059735B07D31F8BA8B /* PureScan.storekit */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "PureScan.storekit"; path = "Config/PureScan.storekit"; sourceTree = "<group>"; };
+		58B8ED03F669221A08E4DBDA /* PureScanWidgets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "PureScanWidgets.entitlements"; path = "Config/PureScanWidgets.entitlements"; sourceTree = "<group>"; };
+		432C1A83D32FD8DD0F46F787 /* Widget-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Widget-Info.plist"; path = "Config/Widget-Info.plist"; sourceTree = "<group>"; };
+		8BC07BEFCC123BD7ABE4873E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Assets.xcassets"; path = "Resources/Assets.xcassets"; sourceTree = "<group>"; };
+		D080F2EC532FF5286209329D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "PrivacyInfo.xcprivacy"; path = "Resources/PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
+		5F1670362C13E15B1556C054 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en"; path = "Resources/en.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		AD3C009FF7C0CE942634158B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Resources/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		502921C3D5E584D8099FEE8A /* PureScanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PureScanApp.swift"; path = "Sources/PureScanApp.swift"; sourceTree = "<group>"; };
+		A445F094BBBF629F5AF7D2D9 /* HistoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "HistoryStore.swift"; path = "Sources/Services/HistoryStore.swift"; sourceTree = "<group>"; };
+		8650925723BC41B861AE93C7 /* ReceiptCardRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ReceiptCardRenderer.swift"; path = "Sources/Services/ReceiptCardRenderer.swift"; sourceTree = "<group>"; };
+		BEF6729E7F36AC5EDD4312EC /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "StoreManager.swift"; path = "Sources/Services/StoreManager.swift"; sourceTree = "<group>"; };
+		3921C6DB428CC8A7AE92DBB6 /* VisionOCRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VisionOCRService.swift"; path = "Sources/Services/VisionOCRService.swift"; sourceTree = "<group>"; };
+		F910D69032EF26F9F43A33F4 /* IngredientAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "IngredientAnalyzer.swift"; path = "Sources/Shared/IngredientAnalyzer.swift"; sourceTree = "<group>"; };
+		4D3BD41F7E0C8153C49325EF /* IngredientDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "IngredientDatabase.swift"; path = "Sources/Shared/IngredientDatabase.swift"; sourceTree = "<group>"; };
+		4B8CE034CA45F86EC91DF336 /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "L10n.swift"; path = "Sources/Shared/L10n.swift"; sourceTree = "<group>"; };
+		027D6C57B4D37BF92871E961 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Models.swift"; path = "Sources/Shared/Models.swift"; sourceTree = "<group>"; };
+		228EB5B49196FCDD13DAB6F1 /* CabinetHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CabinetHistoryView.swift"; path = "Sources/Views/CabinetHistoryView.swift"; sourceTree = "<group>"; };
+		C25DB348E85689D41289CBC1 /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CameraPreviewView.swift"; path = "Sources/Views/CameraPreviewView.swift"; sourceTree = "<group>"; };
+		1EB9144BEB19A3EEF40783AF /* ComparePKView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ComparePKView.swift"; path = "Sources/Views/ComparePKView.swift"; sourceTree = "<group>"; };
+		8747B9C263E3E82F8B0F3724 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MainTabView.swift"; path = "Sources/Views/MainTabView.swift"; sourceTree = "<group>"; };
+		3B7DCCB6580BA34F282583E9 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PaywallView.swift"; path = "Sources/Views/PaywallView.swift"; sourceTree = "<group>"; };
+		76283E4A2ED541EC756D909D /* RadarProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "RadarProfileView.swift"; path = "Sources/Views/RadarProfileView.swift"; sourceTree = "<group>"; };
+		AAF31F512A48552CE782C838 /* ScanResultSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ScanResultSheet.swift"; path = "Sources/Views/ScanResultSheet.swift"; sourceTree = "<group>"; };
+		1A210F1E7DDDC2906CA78E22 /* ScannerHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ScannerHomeView.swift"; path = "Sources/Views/ScannerHomeView.swift"; sourceTree = "<group>"; };
+		2B4D296DEA9ECD76D0D06882 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Theme.swift"; path = "Sources/Views/Theme.swift"; sourceTree = "<group>"; };
+		1BE0A17B7D0457BDEF7E3A37 /* PureScanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PureScanTests.swift"; path = "Tests/PureScanTests.swift"; sourceTree = "<group>"; };
+		1A912CDD304F7A60BB6801F3 /* PureScanWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PureScanWidget.swift"; path = "Widgets/PureScanWidget.swift"; sourceTree = "<group>"; };
+		422C07CAE84EF3A5FACF3322 /* PureScan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PureScan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E693243FD5416B5E6A74E0F /* PureScanWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PureScanWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		65DCD664DF104C22F0805871 /* PureScanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PureScanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		745085A86EF33B4E9D7DDF88 /* Frameworks (PureScan) */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		561E5D40510532A18B901ADA /* Frameworks (PureScanWidgets) */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A25C28F9387EF9AC1024101A /* Frameworks (PureScanTests) */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E0053F9A2FE60169B06FFFF1 = {
+			isa = PBXGroup;
+			children = (
+				62F8E95862873D3C77FB15C5 /* Sources */,
+				42209AE5E627D645871EDFF4 /* Widgets */,
+				7F9642AD46322BD0BB300C80 /* Tests */,
+				70E6F6C1D17B0018E030A405 /* Resources */,
+				F8C4B874F57C026056375D80 /* Config */,
+				AF5A78E9CD50DCB2EA7A5A7D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		62F8E95862873D3C77FB15C5 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				502921C3D5E584D8099FEE8A,
+				A445F094BBBF629F5AF7D2D9,
+				8650925723BC41B861AE93C7,
+				BEF6729E7F36AC5EDD4312EC,
+				3921C6DB428CC8A7AE92DBB6,
+				F910D69032EF26F9F43A33F4,
+				4D3BD41F7E0C8153C49325EF,
+				4B8CE034CA45F86EC91DF336,
+				027D6C57B4D37BF92871E961,
+				228EB5B49196FCDD13DAB6F1,
+				C25DB348E85689D41289CBC1,
+				1EB9144BEB19A3EEF40783AF,
+				8747B9C263E3E82F8B0F3724,
+				3B7DCCB6580BA34F282583E9,
+				76283E4A2ED541EC756D909D,
+				AAF31F512A48552CE782C838,
+				1A210F1E7DDDC2906CA78E22,
+				2B4D296DEA9ECD76D0D06882,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		42209AE5E627D645871EDFF4 /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				1A912CDD304F7A60BB6801F3,
+			);
+			name = Widgets;
+			sourceTree = "<group>";
+		};
+		7F9642AD46322BD0BB300C80 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				1BE0A17B7D0457BDEF7E3A37,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		70E6F6C1D17B0018E030A405 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8BC07BEFCC123BD7ABE4873E,
+				D080F2EC532FF5286209329D,
+				0ACFB02F4CDEF867B65442B1,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		F8C4B874F57C026056375D80 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				1E41F2B7BF4830D7C3EF62EB,
+				432C1A83D32FD8DD0F46F787,
+				6AD3A4FF10F9D5D9C4588CC6,
+				58B8ED03F669221A08E4DBDA,
+				9397D6059735B07D31F8BA8B,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
+		AF5A78E9CD50DCB2EA7A5A7D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				422C07CAE84EF3A5FACF3322,
+				8E693243FD5416B5E6A74E0F,
+				65DCD664DF104C22F0805871,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6984916EBE133C2DAD3C5C88 /* PureScan */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4503ECBC87164B12D58B518E;
+			buildPhases = (
+				BC8054A469AA8CDBEED0EE8B /* Sources */,
+				745085A86EF33B4E9D7DDF88 /* Frameworks */,
+				269C9018E6CAFE529A08590C /* Resources */,
+				879479A4AF0B189BC6CB82AD /* Embed Foundation Extensions */,
+			);
+			buildRules = ();
+			dependencies = (
+				4C93A9F7D9F8C60EDA0FD40A /* PBXTargetDependency */,
+			);
+			name = PureScan;
+			productName = PureScan;
+			productReference = 422C07CAE84EF3A5FACF3322;
+			productType = "com.apple.product-type.application";
+		};
+		B901CE3AD4D22A01F9C17A81 /* PureScanWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDF8AA2BD1E7038274FFAFCC;
+			buildPhases = (
+				5BF6ACB403754C78AF2C4E18 /* Sources */,
+				561E5D40510532A18B901ADA /* Frameworks */,
+				180E4AF32D2B95EFAEEFCF7C /* Resources */,
+			);
+			buildRules = ();
+			dependencies = ();
+			name = PureScanWidgets;
+			productName = PureScanWidgets;
+			productReference = 8E693243FD5416B5E6A74E0F;
+			productType = "com.apple.product-type.app-extension";
+		};
+		1F702BAD3F9570245A4B3E35 /* PureScanTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18B029FFCF249D50EA6B9862;
+			buildPhases = (
+				428A14F3D04F8C234384A9F4 /* Sources */,
+				A25C28F9387EF9AC1024101A /* Frameworks */,
+				3305F312754F5EE8795EDC3D /* Resources */,
+			);
+			buildRules = ();
+			dependencies = (
+				B2886AA097E19B41BF6999E4 /* PBXTargetDependency */,
+			);
+			name = PureScanTests;
+			productName = PureScanTests;
+			productReference = 65DCD664DF104C22F0805871;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AFFEF21EC6F830D2FCBDB38F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2720;
+				LastUpgradeCheck = 2720;
+				TargetAttributes = {
+					6984916EBE133C2DAD3C5C88 = { DevelopmentTeam = KU364788TC; ProvisioningStyle = Automatic; };
+					B901CE3AD4D22A01F9C17A81 = { DevelopmentTeam = KU364788TC; ProvisioningStyle = Automatic; };
+					1F702BAD3F9570245A4B3E35 = { DevelopmentTeam = KU364788TC; TestTargetID = 6984916EBE133C2DAD3C5C88; };
+				};
+			};
+			buildConfigurationList = C74D8871638140F176A6A109;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = "zh-Hans";
+			hasScannedForEncodings = 0;
+			knownRegions = (en, "zh-Hans", Base);
+			mainGroup = E0053F9A2FE60169B06FFFF1;
+			productRefGroup = AF5A78E9CD50DCB2EA7A5A7D;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6984916EBE133C2DAD3C5C88 /* PureScan */,
+				B901CE3AD4D22A01F9C17A81 /* PureScanWidgets */,
+				1F702BAD3F9570245A4B3E35 /* PureScanTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		269C9018E6CAFE529A08590C = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2A9059073A546B964DABE2B /* app_res::Assets.xcassets */,
+				026604F5354FB4507AAA9862 /* app_res::PrivacyInfo.xcprivacy */,
+				4E0D6DDF2E86A70C855DCC89 /* app_res::InfoPlist.strings */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		180E4AF32D2B95EFAEEFCF7C = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E2F211730D53142DFF9665D /* widget_res::PrivacyInfo.xcprivacy */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3305F312754F5EE8795EDC3D = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DFC4F1427869EA35533C15D /* test_res::PureScan.storekit */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BC8054A469AA8CDBEED0EE8B = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A63E91B698A0D0884026F36 /* Sources/PureScanApp.swift */,
+				75AE8E5A950906723EA4A680 /* Sources/Services/HistoryStore.swift */,
+				A6B28214A3FACB2B63D42C83 /* Sources/Services/ReceiptCardRenderer.swift */,
+				439A2AA3B5D6E35623DBC696 /* Sources/Services/StoreManager.swift */,
+				B8E2A0B100D48A89791B9118 /* Sources/Services/VisionOCRService.swift */,
+				DC02249A7D4AEAEBD3A8B456 /* Sources/Shared/IngredientAnalyzer.swift */,
+				BA31E264795E5889D8C83AB4 /* Sources/Shared/IngredientDatabase.swift */,
+				AF6DC6AF6A4B0D976A4DBD2F /* Sources/Shared/L10n.swift */,
+				C734926467DE38D417575747 /* Sources/Shared/Models.swift */,
+				461B0807695B45FF66AB2451 /* Sources/Views/CabinetHistoryView.swift */,
+				84AC08805DD69EB18927F768 /* Sources/Views/CameraPreviewView.swift */,
+				A171416EC67C14DCA88D9A2B /* Sources/Views/ComparePKView.swift */,
+				22227EDB1643C842E7C306F4 /* Sources/Views/MainTabView.swift */,
+				348072CEC3C285E301865D77 /* Sources/Views/PaywallView.swift */,
+				2D0B7D9EB888F57B85A59775 /* Sources/Views/RadarProfileView.swift */,
+				D31618BFC512520D7B865E0C /* Sources/Views/ScanResultSheet.swift */,
+				A613C1CAF93DC91EF5504E5B /* Sources/Views/ScannerHomeView.swift */,
+				924291BEF7CBCF297B5C3122 /* Sources/Views/Theme.swift */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5BF6ACB403754C78AF2C4E18 = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24F736948E737EC6038A19B8 /* Widgets/PureScanWidget.swift */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		428A14F3D04F8C234384A9F4 = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				847B90ACE6FAF1A8959DCBCD /* Tests/PureScanTests.swift */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4C93A9F7D9F8C60EDA0FD40A = {isa = PBXTargetDependency; target = B901CE3AD4D22A01F9C17A81; targetProxy = 6072AEE047A0A9D7EECF7492; };
+		B2886AA097E19B41BF6999E4 = {isa = PBXTargetDependency; target = 6984916EBE133C2DAD3C5C88; targetProxy = FA6094939BBC793624E76B79; };
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0ACFB02F4CDEF867B65442B1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD3C009FF7C0CE942634158B /* zh-Hans */,
+				5F1670362C13E15B1556C054 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A0A9CD0BBE122D9CBDC4EAC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KU364788TC;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0.0;
+				CURRENT_PROJECT_VERSION = 1;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG";
+			};
+			name = Debug;
+		};
+		F356483D74DEA678E80CF26A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KU364788TC;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0.0;
+				CURRENT_PROJECT_VERSION = 1;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7EDD718CAC0D4ECF2FECFB85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Config/PureScan.entitlements";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Config/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yanghe.purescan;
+				PRODUCT_NAME = PureScan;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+			};
+			name = Debug;
+		};
+		5800E640118A50BA5EBACB12 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Config/PureScan.entitlements";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Config/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yanghe.purescan;
+				PRODUCT_NAME = PureScan;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "PureScan AppStore Dist";
+			};
+			name = Release;
+		};
+		1A7CE8DE6EC0D32C5DB197AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = "Config/PureScanWidgets.entitlements";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Config/Widget-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yanghe.purescan.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+			};
+			name = Debug;
+		};
+		0C9A807196038BAE8505998B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = "Config/PureScanWidgets.entitlements";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Config/Widget-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yanghe.purescan.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "PureScan Widgets AppStore Dist";
+			};
+			name = Release;
+		};
+		AFEB9FA2A0F0140309618210 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yanghe.purescan.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PureScan.app/PureScan";
+			};
+			name = Debug;
+		};
+		E484EE531B6FCFA63775DB21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yanghe.purescan.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PureScan.app/PureScan";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C74D8871638140F176A6A109 /* Build configuration list for PBXProject PureScan */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0A9CD0BBE122D9CBDC4EAC0 /* Debug */,
+				F356483D74DEA678E80CF26A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4503ECBC87164B12D58B518E /* Build configuration list for PBXNativeTarget PureScan */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EDD718CAC0D4ECF2FECFB85 /* Debug */,
+				5800E640118A50BA5EBACB12 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDF8AA2BD1E7038274FFAFCC /* Build configuration list for PBXNativeTarget PureScanWidgets */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A7CE8DE6EC0D32C5DB197AB /* Debug */,
+				0C9A807196038BAE8505998B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18B029FFCF249D50EA6B9862 /* Build configuration list for PBXNativeTarget PureScanTests */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFEB9FA2A0F0140309618210 /* Debug */,
+				E484EE531B6FCFA63775DB21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AFFEF21EC6F830D2FCBDB38F /* Project object */;
+}

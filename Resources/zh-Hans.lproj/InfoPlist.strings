@@ -1,0 +1,4 @@
+"CFBundleDisplayName" = "配料照妖镜";
+"NSCameraUsageDescription" = "配料照妖镜需要访问相机用于本地离线拍摄食品、护肤品或猫狗粮配料表文字，全程在设备端识别，绝不上传云端。";
+"NSPhotoLibraryUsageDescription" = "配料照妖镜需要读取您选择的配料表照片或网购商品详情截图用于本地离线成分解析，绝不上传云端。";
+"NSPhotoLibraryAddUsageDescription" = "配料照妖镜仅在您主动点击导出避雷小票图或双品 PK 对比图时将结果卡保存到系统相册。";
