@@ -1,10 +1,14 @@
 # 🔥 配料照妖镜（配料表扫描仪）已正式上架 · 今晚直接开推手发包
 
-> ✅ **已于 2026-11-20 正式通过苹果审核上架 App Store！**
-> - **苹果 App Store 官方直达链接**：`https://apps.apple.com/cn/app/id6837347918`
-> - **商店直接搜索关键词**：`配料照妖镜` 或 `配料表扫描仪`
+> ✅ **已于 2026-11-20 正式通过苹果审核上架全球 174 个地区（含美/港/台/新/澳/英/日），月卡/年卡/终身买断 3 档内购全部 APPROVED！**
+> ⚠️ **2026-11-21 实测避坑提醒**：中国大陆区（`cn`）当前因苹果 `ICP_NUMBER_MISSING` 暂不可见（`/cn/` 链接会 404）；**美区/港区/台区均已实测 `HTTP 200` 正常可下**！发小红书请主打 **海外华人 / 港台 / 有外区 Apple ID 用户**，并同步发下方英文版直吃美区美元订阅！
+> - **苹果 App Store 实测可用直达链接**：
+>   - 美区：`https://apps.apple.com/us/app/id6837347918`
+>   - 港区：`https://apps.apple.com/hk/app/id6837347918`
+>   - 台区：`https://apps.apple.com/tw/app/id6837347918`
+> - **商店直接搜索关键词**：美区搜 `PureScan Ingredient Scanner`；港台区搜 `配料照妖镜` 或 `PureScan`
 > - **公网介绍页**：`https://a3152557994-ship-it.github.io/purescan/`
-> - **现成素材位置**：`/Users/wang/OPC/projects/purescan/release/media/`（含新增实拍风爆款封面 `xhs_00_live_supermarket_cover.png`、4 张高转化功能对比图 + 15 秒 9:16 竖屏视频 `purescan_hook_15s_9x16.mp4`）
+> - **现成素材位置**：`/Users/wang/OPC/projects/purescan/release/media/`（含实拍风爆款封面 `xhs_00_live_supermarket_cover.png`、4 张高转化功能对比图 + 15 秒 9:16 竖屏视频 `purescan_hook_15s_9x16.mp4`）
 
 ---
 
@@ -26,7 +30,7 @@
   > #配料表干净 #配料照妖镜 #食品添加剂 #超市避雷 #宝藏App #独立开发 #控糖减脂 #养猫成分党
 
 - **置顶自评（发完秒评置顶）**：
-  > 苹果 App Store 直接搜 **「配料照妖镜」** 或 **「配料表扫描仪」** 就能免费下（图标是红白扫描框那个，0广告免登录）！想看哪种网红面包/猫粮/酱油实测的直接留言👇
+  > 苹果外区（港/台/美区 App Store）直接搜 **「PureScan」** 或 **「配料照妖镜」** 就能免费下（0广告免登录；大陆区 ICP 备案补齐中，外区 ID 现在直接用）！想看哪种网红零食/猫粮/酱油实测的直接留言👇
 
 ---
 
@@ -47,4 +51,22 @@
 ## 第 3 枪（15秒 9:16 竖屏短视频：抖音 + 小红书视频同步发）
 - **视频成品**：`media/purescan_hook_15s_9x16.mp4`
 - **标题**：`15秒照穿网红吐司 vs 极简酸奶！逛超市再也不交智商税🔥`
-- **正文**：纠结买哪包？左扫一包、右扫一包，0.3 秒离线同屏 PK 直接盖章！0 广告免登录，苹果 App Store 搜「配料照妖镜」免费日扫 10 次。
+- **正文**：纠结买哪包？左扫一包、右扫一包，0.3 秒离线同屏 PK 直接盖章！0 广告免登录，港/台/美区 App Store 搜「PureScan」或「配料照妖镜」免费日扫 10 次。
+
+---
+
+## 第 4 枪（海外美元直出：Reddit / X / TikTok 英文冷启动帖，零 ICP 限制立即收美金）
+- **配图/视频**：直接复用 `media/xhs_00_live_supermarket_cover.png` + `media/purescan_hook_15s_9x16.mp4`
+- **推荐社区**：`r/SideProject`、`r/iosapps`、`r/EatCheapAndHealthy`、`r/Celiac`、`r/petfood`、X（Twitter）
+- **标题**：`I got tired of Yuka saying "Barcode Not Found" on local bakery items & pet food, so I built an 100% offline OCR ingredient scanner (Zero ads, No account)`
+- **正文**：
+  > Every time I scanned store-brand snacks, Asian market sauces, bakery bread, or cat food with popular barcode scanners, half of them came back "Barcode Not Found" — and then hit me with a paywall.
+  >
+  > So I built **PureScan** for iOS (just went live on the App Store!):
+  > - **100% On-Device OCR (No Barcode Database Needed)**: Point your camera directly at the actual ingredients list on the back. Works offline in dead-zone supermarket aisles on literally ANY food, skincare, or pet food label.
+  > - **6 Custom Red-Flag Radars**: Keto/Low-Sugar, Gout/Purine traps (hidden yeast extract / E635), Pregnancy/Baby, Acne-prone skincare, and Cat/Dog food grain-splitting tricks.
+  > - **Side-by-Side PK Mode**: Scan two items to instantly compare which one is cleaner.
+  > - **Zero ads, zero login, 10 free scans/day.**
+  >
+  > App Store (US/Global): https://apps.apple.com/us/app/id6837347918
+  > Would love honest feedback from anyone who reads ingredient labels at the grocery store!

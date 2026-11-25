@@ -1,0 +1,25 @@
+# 配料照妖镜 PureScan — 0广告离线食品/护肤/猫狗粮配料表扫描仪
+
+> PureScan (配料照妖镜) is a zero-ad, 100% offline ingredient label OCR scanner for iOS, iPadOS, and Web. Unlike barcode apps that fail on store-brand snacks or overseas cosmetics, PureScan reads raw ingredient text directly in 0.3s across 6 personalized radars: Additives, Low-Sugar/Keto, Gout/Purine, Pregnancy/Kids, Comedogenic Skincare INCI, and Pet Food grain-splitting.
+
+## Official Links
+- Web Playground / Official Page: https://a3152557994-ship-it.github.io/purescan/
+- Apple App Store (iOS / iPadOS / Apple Silicon Mac): https://apps.apple.com/us/app/id6837347918
+- Hong Kong / Taiwan App Store: https://apps.apple.com/hk/app/id6837347918
+- Privacy Policy (100% On-Device, Zero Data Collected): https://a3152557994-ship-it.github.io/purescan/privacy.html
+- Support: https://a3152557994-ship-it.github.io/purescan/support.html
+
+## Frequently Asked Questions
+- **为什么不用扫条形码，直接拍配料表更好用？** 传统条形码软件遇到超市自营烘焙、进口零食或新款猫粮经常提示『未收录』；配料照妖镜直接离线识读包装背面的真实配料文字，地下超市没信号也能 0.3 秒出红黑榜。
+- **痛风高尿酸和猫狗粮也能扫吗？** 可以！内置痛风隐形高嘌呤雷达（揪出零添加酱油/浓汤里的酵母抽提物、呈味核苷酸二钠与果葡糖浆）及宠粮雷达（自动识破前6位拆分玉米大米豆粕的谷物分割法与BHA/BHT）。
+- **免费版够日常逛超市用吗？** 每日免费提供充足离线扫描额度且 0 摇一摇广告、免手机号登录；重度用户可一杯奶茶钱买断终身无限次 Pro，无强制高价年费套路。
+
+## Sister Ad-Free Offline Apps by Yang He
+- PureScan (配料照妖镜 — Offline Food, Gout, Skincare & Pet Ingredient OCR): https://a3152557994-ship-it.github.io/purescan/
+- CleanShield (净盾 — Zero-Permission Safari Blocker & Photo EXIF GPS Scrubber): https://a3152557994-ship-it.github.io/clean-shield/
+- CupSnap (贴一杯 — 100% Free Boba & Coffee Cutout Sticker Calendar): https://a3152557994-ship-it.github.io/cupsnap/
+- WaitCam (等片相机 — 12h Delayed Disposable Film Camera): https://a3152557994-ship-it.github.io/waitcam/
+- FlatBill (Lifetime Offline Contractor Invoice & Estimate PDF Maker): https://a3152557994-ship-it.github.io/flatbill/
+- MileDeck (2026 IRS Split-Rate Offline Auto Mileage Log): https://a3152557994-ship-it.github.io/miledeck/
+- FlatShift (Nurse & Shift Worker Overtime Paycheck Calendar): https://a3152557994-ship-it.github.io/flatshift/
+- OPC Micro-Tools Hub (16 Browser-Local AI & Productivity Utilities): https://a3152557994-ship-it.github.io/opc-tools/

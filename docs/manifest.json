@@ -1,0 +1,17 @@
+{
+  "name": "配料照妖镜 PureScan — 0广告离线食品/护肤/猫狗粮配料表扫描仪",
+  "short_name": "配料照妖镜",
+  "description": "不用扫条形码！对准包装背面配料表原文0.3秒本地离线识别，覆盖控糖减脂、痛风隐形嘌呤、孕妈儿童、敏感致痘护肤INCI与猫狗粮谷物分割法6大避雷雷达，0广告免登录。",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F7F5EF",
+  "theme_color": "#DA2525",
+  "icons": [
+    {
+      "src": "./icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
