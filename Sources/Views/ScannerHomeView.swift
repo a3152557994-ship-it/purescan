@@ -5,7 +5,6 @@ import SwiftUI
 struct ScannerHomeView: View {
     @EnvironmentObject var history: HistoryStore
     @EnvironmentObject var store: StoreManager
-    @Environment(\.requestReview) private var requestReview
 
     @StateObject private var camera = CameraController()
     @State private var selectedPhotoItem: PhotosPickerItem?
@@ -524,18 +523,12 @@ struct ScannerHomeView: View {
             customBlacklist: history.customBlacklist
         )
         store.recordCompletedScan()
+        FunnelMetrics.shared.record(.scanCompleted(domain: record.domain.rawValue))
         history.saveRecord(record)
 
         let feedback = UINotificationFeedbackGenerator()
         feedback.notificationOccurred(record.grade == .clean ? .success : .warning)
 
         activeResult = record
-
-        // Gently prompt 5-star review right after user's 2nd joyful free scan
-        if store.totalSuccessfulScans == 2 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
-                requestReview()
-            }
-        }
     }
 }

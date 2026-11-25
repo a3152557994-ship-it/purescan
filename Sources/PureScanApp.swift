@@ -9,8 +9,15 @@ struct PureScanApp: App {
         let args = ProcessInfo.processInfo.arguments
         if let langIdx = args.firstIndex(of: "-ui_lang"), langIdx + 1 < args.count {
             let code = args[langIdx + 1].lowercased()
-            L10n.currentLanguage = code.hasPrefix("en") ? .en : .zhHans
+            if code.hasPrefix("en") {
+                L10n.currentLanguage = .en
+            } else if code.contains("hant") || code.contains("tw") || code.contains("hk") {
+                L10n.currentLanguage = .zhHant
+            } else {
+                L10n.currentLanguage = .zhHans
+            }
         }
+        FunnelMetrics.shared.record(.appLaunch)
         _history = StateObject(wrappedValue: HistoryStore())
     }
 

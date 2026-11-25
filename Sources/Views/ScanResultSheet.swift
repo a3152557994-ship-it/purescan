@@ -1,3 +1,4 @@
+import StoreKit
 import SwiftUI
 import UIKit
 
@@ -5,6 +6,8 @@ struct ScanResultSheet: View {
     @EnvironmentObject var history: HistoryStore
     @EnvironmentObject var store: StoreManager
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.requestReview) private var requestReview
+    @Environment(\.openURL) private var openURL
 
     @State var record: ScanRecord
     var onSendToPK: (ScanRecord) -> Void
@@ -14,6 +17,7 @@ struct ScanResultSheet: View {
     @State private var showShareSheet = false
     @State private var editingName = false
     @State private var draftName = ""
+    @State private var showReviewGateCard = false
 
     private var gradeColor: Color { LabTheme.color(for: record.grade) }
 
@@ -23,6 +27,9 @@ struct ScanResultSheet: View {
                 VStack(alignment: .leading, spacing: 16) {
                     verdictHeroCard
                     cabinetActionBar
+                    if showReviewGateCard {
+                        happyPathReviewGateCard
+                    }
                     if !record.structuralAlerts.isEmpty {
                         structuralAlertsCard
                     }
@@ -33,8 +40,14 @@ struct ScanResultSheet: View {
                 .padding(16)
             }
             .background(LabTheme.paper.ignoresSafeArea())
-            .navigationTitle(L10n.t("照妖镜体检报告", "Inspection Report"))
+            .navigationTitle(L10n.t(en: "Inspection Report", zhHans: "照妖镜体检报告", zhHant: "照妖鏡體檢報告"))
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                if ReviewPromptManager.shared.shouldShowReviewGate(completedScans: store.totalSuccessfulScans) {
+                    showReviewGateCard = true
+                    FunnelMetrics.shared.record(.reviewGateShown)
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(L10n.t("关闭", "Done")) { dismiss() }
@@ -200,6 +213,78 @@ struct ScanResultSheet: View {
                 .clipShape(RoundedRectangle(cornerRadius: 12))
             }
         }
+    }
+
+    private var happyPathReviewGateCard: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .center) {
+                Image(systemName: "sparkles")
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundStyle(LabTheme.clean)
+                Text(L10n.t(
+                    en: "Enjoying PureScan?",
+                    zhHans: "觉得配料照妖镜好用吗？",
+                    zhHant: "覺得配料照妖鏡好用嗎？"
+                ))
+                .font(.system(size: 14, weight: .black))
+                .foregroundStyle(LabTheme.ink)
+                Spacer()
+                Button {
+                    ReviewPromptManager.shared.recordDismissed()
+                    withAnimation { showReviewGateCard = false }
+                } label: {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundStyle(LabTheme.muted)
+                        .padding(5)
+                }
+                .accessibilityLabel(L10n.t(en: "Dismiss", zhHans: "关闭", zhHant: "關閉"))
+            }
+
+            Text(L10n.t(
+                en: "PureScan is 100% ad-free & independent. A quick rating helps more shoppers avoid hidden additives.",
+                zhHans: "配料照妖镜永久无广告、无后台追踪，你的支持能帮助更多人在超市避开隐形添加剂。",
+                zhHant: "配料照妖鏡永久無廣告、無背景追蹤，您的支持能幫助更多人在超市避開隱形添加劑。"
+            ))
+            .font(.system(size: 12))
+            .foregroundStyle(LabTheme.muted)
+
+            HStack(spacing: 10) {
+                Button {
+                    ReviewPromptManager.shared.recordPositiveReviewTapped()
+                    withAnimation { showReviewGateCard = false }
+                    requestReview()
+                } label: {
+                    Text(L10n.t(en: "Yes!", zhHans: "好用！给个好评", zhHant: "好用！給個好評"))
+                        .font(.system(size: 13, weight: .black))
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(LabTheme.clean)
+                        .clipShape(RoundedRectangle(cornerRadius: 11, style: .continuous))
+                }
+
+                Button {
+                    ReviewPromptManager.shared.recordFeedbackTapped()
+                    withAnimation { showReviewGateCard = false }
+                    openURL(ReviewPromptManager.feedbackURL)
+                } label: {
+                    Text(L10n.t(en: "Send Feedback", zhHans: "提点建议", zhHant: "提供建議"))
+                        .font(.system(size: 13, weight: .bold))
+                        .foregroundStyle(LabTheme.ink)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(LabTheme.paper)
+                        .clipShape(RoundedRectangle(cornerRadius: 11, style: .continuous))
+                        .overlay(RoundedRectangle(cornerRadius: 11).stroke(LabTheme.hairline, lineWidth: 1))
+                }
+            }
+        }
+        .labCard(padding: 14)
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .stroke(LabTheme.clean.opacity(0.35), lineWidth: 1.2)
+        )
     }
 
     private var structuralAlertsCard: some View {

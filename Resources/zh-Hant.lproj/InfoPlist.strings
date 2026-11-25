@@ -1,0 +1,4 @@
+"CFBundleDisplayName" = "配料照妖鏡";
+"NSCameraUsageDescription" = "配料照妖鏡需要存取相機，用於本機離線拍攝食品、護膚品或貓狗糧成分表文字，全程在裝置端辨識，絕不上傳雲端。";
+"NSPhotoLibraryUsageDescription" = "配料照妖鏡僅讀取您主動選擇的成分表照片或網購商品詳情截圖進行本機離線分析，絕不上傳雲端。";
+"NSPhotoLibraryAddUsageDescription" = "配料照妖鏡僅在您主動點選匯出避雷小票圖或雙品 PK 對比圖時，將結果圖儲存至系統相簿。";

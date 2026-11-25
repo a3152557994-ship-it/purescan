@@ -85,4 +85,82 @@ final class PureScanTests: XCTestCase {
 
         XCTAssertEqual(IngredientAnalyzer.compareWinner(left: left, right: right), 1, "Clean yogurt must beat additive toast")
     }
+
+    func testTraditionalChineseLocalizationAndOCRMatching() {
+        XCTAssertEqual(AppLanguage.auto.resolvedLanguage(preferredLanguages: ["zh-Hant-TW"]), .zhHant)
+        XCTAssertEqual(AppLanguage.auto.resolvedLanguage(preferredLanguages: ["zh-HK"]), .zhHant)
+        XCTAssertEqual(AppLanguage.auto.resolvedLanguage(preferredLanguages: ["zh-Hans-CN"]), .zhHans)
+        XCTAssertEqual(AppLanguage.auto.resolvedLanguage(preferredLanguages: ["en-US"]), .en)
+
+        let savedLang = L10n.currentLanguage
+        defer { L10n.currentLanguage = savedLang }
+
+        L10n.currentLanguage = .zhHant
+        XCTAssertTrue(L10n.isTraditionalChinese)
+        XCTAssertEqual(L10n.t(en: "Close", zhHans: "关闭", zhHant: "關閉"), "關閉")
+        let converted = L10n.t("默认设置与隐私政策", "Default Settings & Privacy Policy")
+        XCTAssertTrue(converted.contains("預設設定"), "Expected authentic TW/HK phrasing, got \(converted)")
+
+        // Traditional Chinese scanned package label must still trigger database matches
+        let tradLabel = "成分：小麥粉、白砂糖、氫化植物油、脫氫乙酸鈉、酵母抽提物、呈味核苷酸二鈉"
+        let record = IngredientAnalyzer.analyze(
+            rawText: tradLabel,
+            productName: "台灣麵包測試",
+            preferredDomain: .food,
+            activeRadars: [.cleanFood, .goutPurine, .sugarDiet]
+        )
+        XCTAssertTrue(record.hits.contains(where: { $0.id == "sodium_dehydroacetate" }))
+        XCTAssertTrue(record.hits.contains(where: { $0.id == "hydrogenated_oil" }))
+        XCTAssertTrue(record.hits.contains(where: { $0.id == "yeast_extract" }))
+        XCTAssertTrue(record.structuralAlerts.contains(where: { $0.id == "top3_sugar" }))
+    }
+
+    func testReviewPromptManagerHappyPathAnd90DayThrottle() {
+        let suite = "purescan.test.review.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suite)!
+        defer { defaults.removePersistentDomain(forName: suite) }
+
+        let mgr = ReviewPromptManager(defaults: defaults)
+        let t0 = Date(timeIntervalSince1970: 1_700_000_000)
+
+        XCTAssertFalse(mgr.shouldShowReviewGate(completedScans: 1, now: t0, isDemoLaunch: false))
+        XCTAssertTrue(mgr.shouldShowReviewGate(completedScans: 2, now: t0, isDemoLaunch: false))
+        XCTAssertFalse(mgr.shouldShowReviewGate(completedScans: 2, now: t0, isDemoLaunch: true))
+
+        mgr.recordPositiveReviewTapped(now: t0)
+        // Throttled for 90 days
+        let day89 = t0.addingTimeInterval(89 * 24 * 60 * 60)
+        let day91 = t0.addingTimeInterval(91 * 24 * 60 * 60)
+        XCTAssertFalse(mgr.shouldShowReviewGate(completedScans: 5, now: day89, isDemoLaunch: false))
+        XCTAssertTrue(mgr.shouldShowReviewGate(completedScans: 5, now: day91, isDemoLaunch: false))
+    }
+
+    func testFunnelMetricsLocalCounters() {
+        let suite = "purescan.test.funnel.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suite)!
+        defer { defaults.removePersistentDomain(forName: suite) }
+
+        let metrics = FunnelMetrics(defaults: defaults)
+        metrics.record(.appLaunch)
+        metrics.record(.scanCompleted(domain: "food"))
+        metrics.record(.scanCompleted(domain: "skincare"))
+        metrics.record(.paywallImpression(region: "angloROI"))
+        metrics.record(.paywallImpression(region: "angloROI"))
+        metrics.record(.purchaseSucceeded(productId: PureScanProductID.lifetime))
+
+        XCTAssertEqual(metrics.count(for: .appLaunch), 1)
+        XCTAssertEqual(metrics.count(for: .scanCompleted(domain: "")), 2)
+        XCTAssertEqual(metrics.paywallConversionRate, 0.5, accuracy: 0.001)
+    }
+
+    func testPaywallThreeRegionProfiles() {
+        XCTAssertEqual(PaywallRegionProfile.resolve(regionCode: "US", language: .en), .angloROI)
+        XCTAssertEqual(PaywallRegionProfile.resolve(regionCode: "GB", language: .en), .angloROI)
+        XCTAssertEqual(PaywallRegionProfile.resolve(regionCode: "DE", language: .en), .euPrivacyLifetime)
+        XCTAssertEqual(PaywallRegionProfile.resolve(regionCode: "FR", language: .en), .euPrivacyLifetime)
+        XCTAssertEqual(PaywallRegionProfile.resolve(regionCode: "HK", language: .zhHant), .eastAsiaDetail)
+        XCTAssertEqual(PaywallRegionProfile.resolve(regionCode: "TW", language: .zhHant), .eastAsiaDetail)
+        XCTAssertEqual(PaywallRegionProfile.resolve(regionCode: "CN", language: .zhHans), .eastAsiaDetail)
+        XCTAssertEqual(PaywallRegionProfile.resolve(regionCode: "JP", language: .en), .eastAsiaDetail)
+    }
 }

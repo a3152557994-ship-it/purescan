@@ -66,6 +66,12 @@ def main() -> None:
         name="zh-Hans",
         path_attr="Resources/zh-Hans.lproj/InfoPlist.strings",
     )
+    zh_hant_strings_fid = add_file(
+        "Resources/zh-Hant.lproj/InfoPlist.strings",
+        "text.plist.strings",
+        name="zh-Hant",
+        path_attr="Resources/zh-Hant.lproj/InfoPlist.strings",
+    )
     en_strings_fid = add_file(
         "Resources/en.lproj/InfoPlist.strings",
         "text.plist.strings",
@@ -342,7 +348,7 @@ def main() -> None:
     w('\t\t\tcompatibilityVersion = "Xcode 14.0";')
     w('\t\t\tdevelopmentRegion = "zh-Hans";')
     w("\t\t\thasScannedForEncodings = 0;")
-    w('\t\t\tknownRegions = (en, "zh-Hans", Base);')
+    w('\t\t\tknownRegions = (en, "zh-Hans", "zh-Hant", Base);')
     w(f"\t\t\tmainGroup = {main_group_id};")
     w(f"\t\t\tproductRefGroup = {products_group_id};")
     w('\t\t\tprojectDirPath = "";')
@@ -407,6 +413,7 @@ def main() -> None:
     w("\t\t\tisa = PBXVariantGroup;")
     w("\t\t\tchildren = (")
     w(f"\t\t\t\t{zh_strings_fid} /* zh-Hans */,")
+    w(f"\t\t\t\t{zh_hant_strings_fid} /* zh-Hant */,")
     w(f"\t\t\t\t{en_strings_fid} /* en */,")
     w("\t\t\t);")
     w("\t\t\tname = InfoPlist.strings;")
@@ -425,8 +432,8 @@ def main() -> None:
         "DEVELOPMENT_TEAM = KU364788TC",
         "ENABLE_USER_SCRIPT_SANDBOXING = YES",
         "IPHONEOS_DEPLOYMENT_TARGET = 18.0",
-        "MARKETING_VERSION = 1.0.0",
-        "CURRENT_PROJECT_VERSION = 1",
+        "MARKETING_VERSION = 1.0.1",
+        "CURRENT_PROJECT_VERSION = 2",
         "SDKROOT = iphoneos",
         'SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"',
         "SWIFT_VERSION = 5.0",

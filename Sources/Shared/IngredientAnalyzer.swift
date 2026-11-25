@@ -4,7 +4,7 @@ enum IngredientAnalyzer {
 
     /// Automatically detect whether raw OCR text looks like Food, Skincare, or Pet Food.
     static func detectDomain(from text: String, activeRadars: Set<RadarType>) -> ScanDomain {
-        let lower = text.lowercased()
+        let lower = L10n.toSimplifiedForMatching(text).lowercased()
         let petSignals = ["原料组成", "猫粮", "狗粮", "宠物饲料", "全价", "牛磺酸", "丝兰提取物", "鲜鸡肉", "肉粉", "动物副产品", "chicken meal", "meat by-products", "taurine", "kibble", "cat food", "dog food", "pet"]
         let skinSignals = ["aqua", "glycerin", "parfum", "retinol", "ceramide", "niacinamide", "salicylic", "hyaluronate", "methylisothiazolinone", "isopropyl myristate", "神经酰胺", "积雪草", "透明质酸", "烟酰胺", "视黄醇", "水杨酸", "羟苯", "变性乙醇", "肉豆蔻酸", "洁面", "面霜", "精华"]
 
@@ -28,10 +28,10 @@ enum IngredientAnalyzer {
             text = text.replacingOccurrences(of: pair.wrong, with: pair.right)
         }
 
-        // Strip common leading prefixes like "配料表：", "配料:", "Ingredients:", "原料组成："
+        // Strip common leading prefixes like "配料表：", "配料:", "Ingredients:", "原料组成：", "原料組成："
         let prefixPatterns = [
-            "^(?:产品)?配料表?\\s*[:：]",
-            "^原料组成\\s*[:：]",
+            "^(?:产品|產品)?配料表?\\s*[:：]",
+            "^原料[组組]成\\s*[:：]",
             "^主要成分\\s*[:：]",
             "^成分表?\\s*[:：]",
             "^ingredients\\s*[:：]"
@@ -48,6 +48,7 @@ enum IngredientAnalyzer {
         // Split by Chinese/English delimiters while flattening nested additive parentheses
         let flattened = working
             .replacingOccurrences(of: "食品添加剂", with: "")
+            .replacingOccurrences(of: "食品添加劑", with: "")
             .replacingOccurrences(of: "（", with: "、")
             .replacingOccurrences(of: "）", with: "、")
             .replacingOccurrences(of: "(", with: ",")
@@ -96,9 +97,10 @@ enum IngredientAnalyzer {
             .filter { !$0.isEmpty }
 
         for (index, token) in tokens.enumerated() {
-            let lowerToken = token.lowercased()
+            let lowerToken = L10n.toSimplifiedForMatching(token).lowercased()
             for blocked in cleanBlacklist {
-                if lowerToken.contains(blocked.lowercased()) {
+                let normalizedBlocked = L10n.toSimplifiedForMatching(blocked).lowercased()
+                if lowerToken.contains(normalizedBlocked) {
                     let hitId = "custom_\(blocked.lowercased())"
                     if !matchedEntryIds.contains(hitId) {
                         matchedEntryIds.insert(hitId)
@@ -135,7 +137,7 @@ enum IngredientAnalyzer {
         }
 
         for (index, token) in tokens.enumerated() {
-            let lowerToken = token.lowercased()
+            let lowerToken = L10n.toSimplifiedForMatching(token).lowercased()
             for entry in candidateEntries {
                 if matchedEntryIds.contains(entry.id) { continue }
                 let matched = entry.aliases.contains { alias in
@@ -193,7 +195,7 @@ enum IngredientAnalyzer {
         var structuralAlerts: [StructuralAlert] = []
 
         if domain == .food {
-            let top3 = tokens.prefix(3).map { $0.lowercased() }
+            let top3 = tokens.prefix(3).map { L10n.toSimplifiedForMatching($0).lowercased() }
             let sugarTerms = ["白砂糖", "绵白糖", "蔗糖", "果葡糖浆", "葡萄糖浆", "麦芽糊精", "sugar", "corn syrup", "hfcs", "glucose syrup"]
             if top3.contains(where: { tok in sugarTerms.contains(where: { tok.contains($0) }) }) {
                 structuralAlerts.append(
@@ -225,7 +227,7 @@ enum IngredientAnalyzer {
         }
 
         if domain == .pet {
-            let top6 = tokens.prefix(6).map { $0.lowercased() }
+            let top6 = tokens.prefix(6).map { L10n.toSimplifiedForMatching($0).lowercased() }
             let grainTerms = ["玉米", "小麦", "大米", "碎米", "豆粕", "谷蛋白", "corn", "wheat", "rice", "soy"]
             let grainCountInTop6 = top6.filter { tok in grainTerms.contains(where: { tok.contains($0) }) }.count
             if grainCountInTop6 >= 2 {

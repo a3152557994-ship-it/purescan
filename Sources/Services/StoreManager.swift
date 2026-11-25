@@ -133,6 +133,7 @@ final class StoreManager: ObservableObject {
         }
 
         do {
+            FunnelMetrics.shared.record(.purchaseStarted(productId: productId))
             let result = try await target.purchase()
             switch result {
             case .success(let verification):
@@ -140,19 +141,21 @@ final class StoreManager: ObservableObject {
                 case .verified(let transaction):
                     await transaction.finish()
                     await refreshEntitlements()
+                    FunnelMetrics.shared.record(.purchaseSucceeded(productId: productId))
                     if productId == PureScanProductID.yearly {
                         scheduleTrialReminderNotification()
                     }
-                    statusMessage = L10n.t("已解锁配料照妖镜 Pro！", "PureScan Pro unlocked!")
+                    statusMessage = L10n.t(en: "PureScan Pro unlocked!", zhHans: "已解锁配料照妖镜 Pro！", zhHant: "已解鎖配料照妖鏡 Pro！")
                     return true
                 case .unverified:
-                    statusMessage = L10n.t("购买校验未通过，请重试。", "Purchase could not be verified.")
+                    statusMessage = L10n.t(en: "Purchase could not be verified.", zhHans: "购买校验未通过，请重试。", zhHant: "購買驗證未通過，請重試。")
                     return false
                 }
             case .userCancelled:
+                FunnelMetrics.shared.record(.purchaseCancelled(productId: productId))
                 return false
             case .pending:
-                statusMessage = L10n.t("交易等待批准中。", "Purchase is pending approval.")
+                statusMessage = L10n.t(en: "Purchase is pending approval.", zhHans: "交易等待批准中。", zhHant: "交易等待核准中。")
                 return false
             @unknown default:
                 return false
