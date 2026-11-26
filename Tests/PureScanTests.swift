@@ -163,4 +163,61 @@ final class PureScanTests: XCTestCase {
         XCTAssertEqual(PaywallRegionProfile.resolve(regionCode: "CN", language: .zhHans), .eastAsiaDetail)
         XCTAssertEqual(PaywallRegionProfile.resolve(regionCode: "JP", language: .en), .eastAsiaDetail)
     }
+
+    func testCurvedBottleCrossLineCJKStitchingWithoutMissingAdditives() {
+        // Curved bottle wraps mid-word across newlines without spaces for CJK, while English keeps word spaces
+        let wrappedZH = "配料：小麦粉、白砂\n糖、脱氢\n乙酸钠、5'-\r\n呈味核\n苷酸二钠、阿斯\n巴甜"
+        let recordZH = IngredientAnalyzer.analyze(
+            rawText: wrappedZH,
+            productName: "窄瓶饮料",
+            preferredDomain: .food,
+            activeRadars: [.cleanFood, .goutPurine, .sugarDiet]
+        )
+        XCTAssertTrue(recordZH.hits.contains(where: { $0.id == "sodium_dehydroacetate" }), "Must stitch 脱氢\\n乙酸钠 without space")
+        XCTAssertTrue(recordZH.hits.contains(where: { $0.id == "ig_nucleotides" }), "Must stitch 5'-\\r\\n呈味核\\n苷酸二钠")
+        XCTAssertTrue(recordZH.hits.contains(where: { $0.id == "aspartame" }), "Must stitch 阿斯\\n巴甜")
+        XCTAssertTrue(recordZH.structuralAlerts.contains(where: { $0.id == "top3_sugar" }))
+
+        let wrappedEN = "Ingredients:\nCarbonated\nWater, Sodium\nDehydroacetate, High\nFructose Corn\nSyrup"
+        let recordEN = IngredientAnalyzer.analyze(
+            rawText: wrappedEN,
+            preferredDomain: .food,
+            activeRadars: [.cleanFood, .sugarDiet]
+        )
+        XCTAssertTrue(recordEN.hits.contains(where: { $0.id == "sodium_dehydroacetate" }), "English words across lines must preserve space")
+        XCTAssertTrue(recordEN.hits.contains(where: { $0.id == "hfcs" }))
+    }
+
+    func testExpandedOfflineDatabaseExceeds260EntriesAnd60OCRRules() {
+        XCTAssertGreaterThanOrEqual(IngredientDatabase.entries.count, 260, "Offline database must contain 260+ real entries")
+        let uniqueIDs = Set(IngredientDatabase.entries.map(\.id))
+        XCTAssertEqual(uniqueIDs.count, IngredientDatabase.entries.count, "Every database entry ID must be unique")
+        XCTAssertGreaterThanOrEqual(IngredientDatabase.ocrCorrections.count, 60, "Offline OCR typo rules must exceed 60")
+
+        // Verify newly expanded categories (Red 3 FDA ban, PFAS in cosmetics, Lily/Permethrin pet hazard, TG meat glue)
+        let snacks = IngredientAnalyzer.analyze(
+            rawText: "配料：小麦粉、赤藓红、谷氨酰胺转氨酶、番泻叶",
+            preferredDomain: .food,
+            activeRadars: [.cleanFood, .momBaby]
+        )
+        XCTAssertTrue(snacks.hits.contains(where: { $0.id == "erythrosine_red3" }))
+        XCTAssertTrue(snacks.hits.contains(where: { $0.id == "enzyme_transglutaminase" }))
+        XCTAssertTrue(snacks.hits.contains(where: { $0.id == "senna_aloe_cascara_laxative" }))
+    }
+
+    func testUnlistedComplexChemicalIngredientsDoNotFalselyScore100Clean() {
+        let obscureText = "配料：饮用水、全氟己基磺酸衍生物X9、双十八烷基二甲基羟丙基磷酸酯盐、聚氧丙烯氧化乙烯嵌段醚共聚物"
+        let record = IngredientAnalyzer.analyze(
+            rawText: obscureText,
+            productName: "未知复合制剂",
+            preferredDomain: .food,
+            activeRadars: [.cleanFood]
+        )
+
+        XCTAssertLessThan(record.score, 85, "Multiple unlisted chemical terms must NOT blindly score 100 or clean")
+        XCTAssertNotEqual(record.grade, .clean)
+        XCTAssertTrue(record.structuralAlerts.contains(where: { $0.id == "unlisted_complex_ingredients" }))
+        XCTAssertFalse(record.headlineZH.contains("放心塞进购物车"), "Headline must not mislead shoppers when complex ingredients are unlisted")
+        XCTAssertTrue(record.headlineZH.contains("已核验") && record.headlineZH.contains("未收录"))
+    }
 }
